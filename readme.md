@@ -107,27 +107,32 @@ There are many ways to create objects in javascript as below
     
      You can create an object using Object Constructer 
     
-    `var object = new Object();`
+    ````javascript
+    var object = new Object();
+    ````
     
     ### Cross Questions:
-        1.  
+        1.  What is a  Constructer ?
+        2. What is an Object Constructer 
     
 2. **Object's create method:**
     
     The create method of Object creates a new object by passing the prototype object as a parameter
     
     parameters - can be null or any other object 
-    
-    `var object = Object.create(null);`
+    ````javascript 
+    var object = Object.create(null); 
+    ````
     
 3. **Object literal syntax:**
     
     The object literal syntax (or object initializer), is a comma-separated set of name-value pairs wrapped in curly braces.
-    
-    `var object = {
-         name: "Sudheer",
-         age: 34
+    ````javascript 
+    var object = {
+         name: "Robin",
+         age: 23
     };
+    ````
     
     Object literal property values can be of any data type, including array, function, and nested object.`
     
@@ -136,56 +141,106 @@ There are many ways to create objects in javascript as below
 4. **Function constructor:**
     
     Create any function and apply the new operator to create object instances, using function as a constructer
-    
-    `function Person(name) {
+    ````javascript 
+    function Person(name) {
       this.name = name;
       this.age = 21;
     }
-    var object = new Person("Sudheer");`
+    var object = new Person("Sudheer");
+    ````
     
-    [Cross Questions](https://www.notion.so/Cross-Questions-33a7259b0ac04efba91787df3ead9ba9)
-    
+    ### Cross Questions:
+        1. What is difference of creating an object from class and creating an object front the function constructer 
+        2. Is all the function in JavaScript can be called as constructer function ? 
+        3. what is difference between creating an Object from  object literals and creating an object from  function  constructer 
+        4. what is this new keyword and what does it do ?
+   
 5. **Function constructor with prototype:**
     
     This is similar to function constructor but it uses prototype for their properties and methods,
     
-    `function Person() {}
-    Person.prototype.name = "Sudheer";
-    var object = new Person();`
+    ````javascript
+    function Person() {}
+    Person.prototype.name = "Robin";
+    var object = new Person();
+    ````
     
     This is equivalent to an instance created with an object create method with a function prototype and then call that function with an instance and parameters as arguments.
     
-    `function func() {};
+     ````javascript
+     function func() {};
     
-    new func(x, y, z);`
+    new func(x, y, z);
+     ````
     
     **(OR)**
     
-    `// Create a new instance using function prototype.
+    ````javascript
+     // Create a new instance using function prototype.
     var newInstance = Object.create(func.prototype)
     
     // Call the function
     var result = func.call(newInstance, x, y, z),
     
     // If the result is a non-null object then use it otherwise just use the new instance.
-    console.log(result && typeof result === 'object' ? result : newInstance);`
-    
+    console.log(result && typeof result === 'object' ? result : newInstance); 
+    ````
 6. **ES6 Class syntax:**
     
     ES6 introduces class feature to create the objects
     
-    `class Person {
+    ````javascript 
+    class Person {
       constructor(name) {
         this.name = name;
       }
     }
     
-    var object = new Person("Sudheer");`
+    var object = new Person("Sudheer");
+    ````
     
-7. **Singleton pattern:**
-    
-    A Singleton is an object which can only be instantiated one time. Repeated calls to its constructor return the same instance and this way one can ensure that they don't accidentally create multiple instances.
-    
-    `var object = new (function () {
-      this.name = "Sudheer";
-    })();`
+ ## 5. What is the purpose of the array slice method?
+ Slice methods return you new Array from a given array  based upon the start point and end point  it  gave you a `shallow copy` of given array
+ ````javascript
+ const arr=[1, 2, [3], 4, 5]
+const newArr=arr.slice(0,3)
+console.log(arr)
+console.log(newArr)
+newArr[2][0]=15
+console.log(arr)
+console.log(newArr)
+ ````
+
+ Some methods do not mutate the existing array that the method was called on, but instead return a new array. They do so by first accessing [this.constructor[Symbol.species]](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@species) to determine the constructor to use for the new array. The newly constructed array is then populated with elements. The copy always happens *[shallowly](https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy)* — the method never copies anything beyond the initially created array. Elements of the original array(s) are copied into the new array as follows:
+
+- Objects: the object reference is copied into the new array. Both the original and new array refer to the same object. That is, if a referenced object is modified, the changes are visible to both the new and original arrays.
+- Primitive types such as strings, numbers and booleans (not `String`,  `Number` and `Boolean`  objects): their values are copied into the new array.
+
+Other methods mutate the array that the method was called on, in which case their return value differs depending on the method: sometimes a reference to the same array, sometimes the length of the new array.
+
+## 6. What is the purpose of the array splice method?
+The **splice()** method is used either adds/removes items to/from an array, and then returns the removed item. The first argument specifies the array position for insertion or deletion whereas the optional second argument indicates the number of elements to be deleted. Each additional argument is added to the array.
+
+Some of the examples of this method are,
+````javascript
+let arrayIntegersOriginal1 = [1, 2, 3, 4, 5];
+let arrayIntegersOriginal2 = [1, 2, 3, 4, 5];
+let arrayIntegersOriginal3 = [1, 2, 3, 4, 5];
+
+let arrayIntegers1 = arrayIntegersOriginal1.splice(0, 2); // returns [1, 2]; original array: [3, 4, 5]
+let arrayIntegers2 = arrayIntegersOriginal2.splice(3); // returns [4, 5]; original array: [1, 2, 3]
+let arrayIntegers3 = arrayIntegersOriginal3.splice(3, 1, "a", "b", "c"); //returns [4]; original array: [1, 2, 3, "a", "b", "c", 5]
+````
+
+The `splice()` method is a [mutating method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#copying_methods_and_mutating_methods). It may change the content of `this`. If the specified number of elements to insert differs from the number of elements being removed, the array's `length` will be changed as well. At the same time, it uses [@@species](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@species) to create a new array instance to be returned.
+
+If the deleted portion is [sparse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections#sparse_arrays), the array returned by `splice()` is sparse as well, with those corresponding indices being empty slots.
+
+The `splice()` method is [generic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#generic_array_methods). It only expects the `this` value to have a `length` property and integer-keyed properties. Although strings are also array-like, this method is not suitable to be applied on them, as strings are immutable.
+***
+
+| Slice | Splice |
+| --- | ---|
+| Doesn't modify the original array(immutable) | Modifies the original array(mutable) |
+| Returns the subset of original array | Returns the deleted elements as array |
+| Used to pick the elements from array | Used to insert or delete elements to/from array |
