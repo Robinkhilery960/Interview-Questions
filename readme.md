@@ -244,3 +244,76 @@ The `splice()` method is [generic](https://developer.mozilla.org/en-US/docs/W
 | Doesn't modify the original array(immutable) | Modifies the original array(mutable) |
 | Returns the subset of original array | Returns the deleted elements as array |
 | Used to pick the elements from array | Used to insert or delete elements to/from array |
+
+## 7. Objects vs  Maps
+Object is similar to Map—both let you set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key.
+
+However, there are important differences that make Map preferable in some cases:
+
+1. The keys of an Object are Strings and Symbols, whereas they can be any value for a Map, including functions, objects, and any primitive.
+2. The keys in Map are ordered while keys added to Object are not. Thus, when iterating over it, a Map object returns keys in order of insertion.
+3. You can get the size of a Map easily with the size property, while the number of properties in an Object must be determined manually.
+4. A Map is an iterable and can thus be directly iterated, whereas iterating over an Object requires obtaining its keys in some fashion and iterating over them.
+5. An Object has a prototype, so there are default keys in the map that could collide with your keys if you're not careful.  
+6. A Map may perform better in scenarios involving frequent addition and removal of key pairs.
+
+## 8. == Vs ===
+
+The **equality (`==`)**
+ operator checks whether its two operands are equal, returning a Boolean result. Unlike the [strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality)
+ operator, it attempts to convert and compare operands that are of different types.
+
+The equality operators (`==` and `!=`) provide the IsLooselyEqual semantic. This can be roughly summarized as follows:
+
+1. If the operands have the same type, they are compared as follows:
+    - Object: return `true` only if both operands reference the same object.
+    - String: return `true` only if both operands have the same characters in the same order.
+    - Number: return `true` only if both operands have the same value. `+0` and `0` are treated as the same value. If either operand is `NaN`, return `false`; so, `NaN` is never equal to `NaN`.
+    - Boolean: return `true` only if operands are both `true` or both `false`. 
+2. If one of the operands is `null` or `undefined`, the other must also be `null` or `undefined` to return `true`. Otherwise return `false`.
+3. If one of the operands is an object and the other is a primitive, [convert the object to a primitive](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#primitive_coercion).
+4. At this step, both operands are converted to primitives (one of String, Number, Boolean, Symbol, and BigInt). The rest of the conversion is done case-by-case.
+    - If they are of the same type, compare them using step 1.
+    - If one of the operands is a Symbol but the other is not, return `false`.
+    - If one of the operands is a Boolean but the other is not, [convert the boolean to a number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#number_coercion): `true` is converted to 1, and `false` is converted to 0. Then compare the two operands loosely again.
+    - Number to String: [convert the string to a number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#number_coercion). Conversion failure results in `NaN`, which will guarantee the equality to be `false`.
+     
+
+
+The **strict equality (`===`)**
+ operator checks whether its two operands are equal, returning a Boolean result. Unlike the [equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality)
+ operator, the strict equality operator always considers operands of different types to be different.
+
+The strict equality operators (`===` and `!==`) provide the [IsStrictlyEqual](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#strict_equality_using) semantic.
+
+- If the operands are of different types, return `false`.
+- If both operands are objects, return `true` only if they refer to the same object.
+- If both operands are `null` or both operands are `undefined`, return `true`. 
+- Otherwise, compare the two operand's values:
+    - Numbers must have the same numeric values. `+0` and `0` are considered to be the same value.
+    - Strings must have the same characters in the same order.
+    - Booleans must be both `true` or both `false`.
+ 
+Some of the example which covers the above cases,
+
+````javascript
+0 == false   // true
+0 === false  // false
+1 == "1"     // true
+1 === "1"    // false
+null == undefined // true
+null === undefined // false
+'0' == false // true
+'0' === false // false
+[]==[] or []===[] //false, refer different objects in memory
+{}=={} or {}==={} //false, refer different objects in memory
+````
+###  Cross Questions:
+    1. What is type coercion?
+    2. How type coercion is happening in equality operator?
+
+### More to read:
+1. [Type Coercion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#type_coercion) 
+
+## 9. What are arrow function and where to not use them ?
+An arrow function is a shorter syntax for a function expression and does not have its own this, arguments, super, or new.target
