@@ -523,3 +523,26 @@ const greet=function(){
    }
    }
  ````
+## 14. What is curring in JavaScript ?
+Currying refers to the process of transforming a function with multiple number of arguments into the same function with less number of arguments
+````javascript
+const unCurryFunction=(a,b,c)=>{
+    return a+b+c
+} 
+console.log(unCurryFunction(1,2,3))
+
+const curryFunction=(a)=>(b)=>(c)=>a+b+c
+console.log(curryFunction(1)(2)(3))
+
+````
+
+## 15. Pure Function 
+ Pure function is a function where the return value is only determined by its arguments without any side effects. i.e, If you call a function with the same arguments 'n' number of times and 'n' number of places in the application then it will always return the same value.
+A function must pass two tests to be considered pure: 
+1. Same inputs always return same outputs
+2. No side-effect
+````javascript
+const add = (x, y) => x + y;
+
+add(2, 4); // 6
+````
