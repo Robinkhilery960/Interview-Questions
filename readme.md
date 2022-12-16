@@ -317,3 +317,51 @@ null === undefined // false
 
 ## 9. What are arrow function and where to not use them ?
 An arrow function is a shorter syntax for a function expression and does not have its own this, arguments, super, or new.target
+ 
+
+## 10. What is closure? 
+A closure is the combination of a function and the lexical environment within which that function was declared.
+ In other words, a closure gives you access to an outer function's scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+````javascript
+const outer =function(){
+    const fruit="mango"
+    function inner(){
+        console.log(fruit)
+    }
+    return inner
+}
+
+const result=outer() 
+result()
+````
+ In this case, result is a reference to the instance of the function inner that is created when outer   run. The instance of inner maintains a reference to its lexical environment, within which the variable name exists.
+ This environment consists of any local variables that were in-scope at the time the closure was created
+
+## 11. What does Lexical scope means?
+Lexical scope means the scope in which a item is created . In other words area where your item defination lies is called lexical sope of that item .Any item is accessible to the code which is in its lexical scope .
+
+````javascript
+// Define a function:
+function showLastName() {
+  const lastName = "Khilery";
+  return lastName;
+}
+
+// Define another function:
+function displayFullName() {
+  const fullName = "Robin " + lastName;
+  return fullName;
+}
+
+// Invoke displayFullName():
+console.log(displayFullName());
+
+// The invocation above will return:
+//Uncaught ReferenceError: lastName is not defined
+````
+Notice that the invocation of displayFullName() in the snippet above returned an Uncaught ReferenceError. The error returned because only code within an item's lexical scope can access the item.
+
+Therefore, neither the displayFullName() function nor its internal code can access the lastName variable because lastName got defined in a different scope.
+
+In other words, lastName’s lexical scope is different from that of displayFullName()
