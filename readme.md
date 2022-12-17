@@ -364,6 +364,18 @@ The this.count inside the next() method is equivalent to the window.count (in th
 
 The window.count is undefined by default because the window object doesn’t have the count property. The next() method adds one to undefined that results in NaN.
 
+### Constructor :
+Whenever you uses any function as a  constructer function then prototype property of that constructer is set as prototype of created object  and this prototype property contains the constructer , but in case of arrow function this is missing so you cant use arrow function as constructer and also arrow function does not have new.target so it will never know that it is called with new keyword or not. 
+````javascript
+const Car=(make, model, year)=>{
+  this.make = make;
+  this.model = model;
+  this.year = year;
+} 
+Car.prototype
+// undefined
+```` 
+
 ### Prototype methods:
 
 ```javascript
@@ -398,6 +410,7 @@ Arrow functions don’t have the arguments object. Therefore, if you have a func
 Suppose that you have the following input text field and you want to show a greeting message when users type their usernames. The following shows the <div> element that will display the greeting message.
 Once users type their usernames, you capture the current value of the input and update it to the <div> element.
 
+HTML:
 ```html
 <input
   type="text"
@@ -407,7 +420,7 @@ Once users type their usernames, you capture the current value of the input and 
 />
 <div id="greeting"></div>
 ```
-
+JS:
 ```javascript
 const greeting = document.querySelector("#greeting");
 const username = document.querySelector("#username");
@@ -886,10 +899,6 @@ A function definition can only have one rest parameter, and the rest parameter m
 function wrong1(...one, ...wrong) {}
 function wrong2(...wrong, arg2, arg3) {}
 ```
-## 23. rest parameter vs argument object
-### rest parameter:
-1. The arguments object is not a real array, while rest parameters are Array instances, meaning methods like sort(), map(), forEach() or pop() can be applied on it directly.
-2. The rest parameter bundles all the extra parameters into a single array, but does not contain any named argument defined before the ...restParam. The arguments object contains all of the parameters — including the parameters in the ...restParam array — bundled into one array-like object
 ### spread syntax:
 The spread operator is just 3 dots ...
 It can be used on iterables like an array or a string.
@@ -905,7 +914,7 @@ There are three distinct places that accept the spread syntax:
 ````javascript
 const obj = { key1: 'value1' };
 const array = [...obj]; // TypeError: obj is not iterable
-`````  
+````  
 
 On the other hand, spreading in object literals enumerates the own properties of the object. For typical arrays, all indices are enumerable own properties, so arrays can be spread into objects.
 
@@ -913,8 +922,56 @@ On the other hand, spreading in object literals enumerates the own properties of
 ````javascript
 const array = [1, 2, 3];
 const obj = { ...array }; // { 0: 1, 1: 2, 2: 3 }
-````` 
+````
 ### SeeAlso:
   [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#try_it)
 
+## 23. rest parameter vs argument object
+### rest parameter:
+1. The arguments object is not a real array, while rest parameters are Array instances, meaning methods like sort(), map(), forEach() or pop() can be applied on it directly.
+2. The rest parameter bundles all the extra parameters into a single array, but does not contain any named argument defined before the ...restParam. The arguments object contains all of the parameters — including the parameters in the ...restParam array — bundled into one array-like object
+
+## 24. new keyword
+New keyword let you define a new instance of a user defined object type or in-built object type that has a constructer function.
+````javascript
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+}
+
+const car1 = new Car('Eagle', 'Talon TSi', 1993);
+
+console.log(car1.make);
+// expected output: "Eagle"
+````
+When a function is called with the new keyword, the function will be used as a constructor. new will do the following things:
+1. Creates a blank, plain JavaScript object. For convenience, let's call it newInstance.
+2. Points newInstance's [[Prototype]] to the constructor function's prototype property, if the prototype is an Object. Otherwise, newInstance stays as a plain object with Object.prototype as its [[Prototype]].
+````text
+Note:Properties/objects added to the constructor function's prototype property are therefore accessible to all instances created from the constructor function.
+```` 
+3. Executes the constructor function with the given arguments, binding newInstance as the this context (i.e. all references to this in the constructor function now refer to newInstance).
+4. If the constructor function returns a non-primitive, this return value becomes the result of the whole new expression. Otherwise, if the constructor function doesn't return anything or returns a primitive, newInstance is returned instead. (Normally constructors don't return a value, but they can choose to do so to override the normal object creation process.)
+
+Classes can only be instantiated with the new operator — attempting to call a class without new will throw a TypeError. 
+
+A function can know whether it is invoked with new by checking new.target. new.target is only undefined when the function is invoked without new.
+## 25. What is IIFE(Immediately Invoked Function Expression)
+IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. The signature of it would be as below,
+
+````javascript
+(function () {
+  // logic here
+})();
+````
+The primary reason to use an IIFE is to obtain data privacy because any variables declared within the IIFE cannot be accessed by the outside world. i.e, If you try to access variables with IIFE then it throws an error as below,
+
+````javascript
+(function () {
+  var message = "IIFE";
+  console.log(message);
+})();
+console.log(message); //Error: message is not defined
+````
 
