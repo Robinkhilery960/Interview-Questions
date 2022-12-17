@@ -493,7 +493,7 @@ A programming language is said to have First-class functions when functions in t
    const sayHola=(greet){
    console.log(greet())
    }
-   // returning a function  
+   // returning a function
     const sayHola=( ){
      return function(){
     console.log("Hola")
@@ -501,48 +501,229 @@ A programming language is said to have First-class functions when functions in t
    }
 ```
 
-## 13. First Order vs Higher Order functions 
+## 13. First Order vs Higher Order functions
+
 ### First-order:
+
 First-order function is a function that doesn’t accept another function as an argument and doesn’t return a function as its return value.
-````javascript
-const greet=function(){
-    console.log("Hola")
-   }
- ````
- ### Higer order:
- Higher-order function is a function that accepts another function as an argument or returns a function as a return value or both
- ````javascript
- // passing function as parameter
-   const sayHola=(greet){
-   console.log(greet())
-   }
-   // returning a function 
-    const sayHola=( ){
-     return function(){
-    console.log("Hola")
-   }
-   }
- ````
+
+```javascript
+const greet = function () {
+  console.log("Hola");
+};
+```
+
+### Higer order:
+
+Higher-order function is a function that accepts another function as an argument or returns a function as a return value or both
+
+```javascript
+// passing function as parameter
+  const sayHola=(greet){
+  console.log(greet())
+  }
+  // returning a function
+   const sayHola=( ){
+    return function(){
+   console.log("Hola")
+  }
+  }
+```
+
 ## 14. What is curring in JavaScript ?
+
 Currying refers to the process of transforming a function with multiple number of arguments into the same function with less number of arguments
-````javascript
-const unCurryFunction=(a,b,c)=>{
-    return a+b+c
-} 
-console.log(unCurryFunction(1,2,3))
 
-const curryFunction=(a)=>(b)=>(c)=>a+b+c
-console.log(curryFunction(1)(2)(3))
+```javascript
+const unCurryFunction = (a, b, c) => {
+  return a + b + c;
+};
+console.log(unCurryFunction(1, 2, 3));
 
-````
+const curryFunction = (a) => (b) => (c) => a + b + c;
+console.log(curryFunction(1)(2)(3));
+```
 
-## 15. Pure Function 
- Pure function is a function where the return value is only determined by its arguments without any side effects. i.e, If you call a function with the same arguments 'n' number of times and 'n' number of places in the application then it will always return the same value.
-A function must pass two tests to be considered pure: 
+## 15. Pure Function
+
+A function must pass two tests to be considered pure:
+
 1. Same inputs always return same outputs
 2. No side-effect
-````javascript
-const add = (x, y) => x + y;
+   ```text
+   1. Mutating your input
+   2. console.log
+   3. HTTP calls (AJAX/fetch)
+   4. Changing the filesystem (fs)
+   5. Querying the DOM
+   ```
 
+```javascript
+// pure function
+const add = (x, y) => x + y;
 add(2, 4); // 6
-````
+
+// impure function
+ let y=5;
+ add(x)=>{
+    y=y+1;
+    return x+y
+ }
+```
+
+## 16. let, var and const
+
+### var :
+
+Variables declared with var keyword are either function scoped or global scope depending upon where they are declared.Initializtion of variables is optional.
+Variables declared using var are created before any code is executed in a process known as hoisting. Their initial value is undefined.
+Redeclaration, reassigning is possible in same scope
+
+```javascript
+console.log(name); // undefined
+var name = "robin";
+console.log(name); // robin
+var name = "sunil";
+console.log(name); // sunil
+var x = 10;
+function add() {
+  var x = 12;
+  var y = 10;
+  console.log(x + y); // 22
+}
+add();
+{
+  var y = 20;
+}
+console.log(y); // 20 not a block scope
+```
+
+### let :
+
+Variable declared with this keyword are block scope and initializing it to a value is optional.
+Variable declared with let can only be accessed after its declaration is reached beacuse of Temporal Dead Zone.
+Redeclaring the same variable within the same function or block scope raises a SyntaxError while reassiging can be done
+
+```javascript
+var a = 1;
+var b = 2;
+
+if (a === 1) {
+  var a = 11; // the scope is global
+  let b = 22; // the scope is inside the if-block
+
+  console.log(a); // 11
+  console.log(b); // 22
+}
+
+console.log(a); // 11
+console.log(b); // 2
+
+let x = 1;
+
+{
+  var x = 2; // SyntaxError for re-declaration
+}
+```
+
+### const:
+
+Variable declared with this keyword are block scope and they cannot be redeclared annd reassigned and initializer for a constant is required. However, if a constant is an object or array its properties or items can be updated or removed.
+
+```javascript
+// define MY_FAV as a constant and give it the value 7
+const MY_FAV = 7;
+
+// this will throw an error - Uncaught TypeError: Assignment to constant variable.
+MY_FAV = 20;
+
+// MY_FAV is 7
+console.log("my favorite number is: " + MY_FAV);
+
+// trying to redeclare a constant throws an error
+// Uncaught SyntaxError: Identifier 'MY_FAV' has already been declared
+const MY_FAV = 20;
+
+// the name MY_FAV is reserved for constant above, so this will fail too
+var MY_FAV = 20;
+
+// this throws an error too
+let MY_FAV = 20;
+
+// Attempting to overwrite the object throws an error "Assignment to constant variable".
+const MY_OBJECT = { key: "value" };
+MY_OBJECT = { OTHER_KEY: "value" };
+
+// Works fine
+MY_OBJECT.key = "otherValue";
+
+//. Assigning a new array to the variable throws an error "Assignment to constant variable
+const MY_ARRAY = [];
+MY_ARRAY = ["B"];
+
+// Works fine
+MY_ARRAY.push("A"); // ["A"]
+```
+
+## 17. What is Hoisting ?
+
+Javascript hoisting refer to the process where declaration of functions, variables or classes move to the top of their scope before execution of the code.. Remember that JavaScript only hoists declarations, not initialisation
+
+### Variable Hoisting:
+
+Variables declaration are hoisted to top of their scope.Undeclared variables do not exist until code assigning them is executed.Therefore, assigning a value to an undeclared variable implicitly creates it as a global variable when the assignment is executed. This means that, all undeclared variables are global variables.
+
+```javascript
+console.log(typeof variable); // undefined
+console.log(variable); // Refernece error - when try to access an undeclared  variable
+
+console.log(hoist); // Output: undefined
+
+var hoist = "The variable has been hoisted.";
+
+function hoist() {
+  console.log(message);
+  var message = "Hoisting is all the rage!";
+}
+
+hoist(); // Ouput: undefined
+
+// let keyword
+console.log(hoist); // Output: ReferenceError: hoist is not defined ...
+let hoist = "The variable has been hoisted.";
+
+// const keyword
+console.log(hoist); // Output: ReferenceError: hoist is not defined
+const hoist = "The variable has been hoisted.";
+```
+
+### Function Hoisting:
+
+### Function declaration:
+
+The function declaration defines a function with the specified parameters.A function created with a function declaration is a Function object and has all the properties, methods and behavior of Function objects.Function declarations in JavaScript are hoisted to the top of the enclosing function or global scope. You can use the function before you declared it:
+
+```javascript
+hoisted(); // Logs "foo"
+function hoisted() {
+  console.log("foo");
+}
+```
+
+### Function expression:
+
+The function keyword can be used to define a function inside an expression.A function created with a function expression is a Function object and has all the properties, methods and behavior of Function objects.
+Function expressions in JavaScript are not hoisted, unlike function declarations. You can't use function expressions before you create them:
+
+```javascript
+console.log(notHoisted); // undefined
+// Even though the variable name is hoisted,
+// the definition isn't. so it's undefined.
+notHoisted(); // TypeError: notHoisted is not a function
+
+var notHoisted = function () {
+  console.log("bar");
+};
+```
+
+
