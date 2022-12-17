@@ -860,4 +860,61 @@ console.log(rest);
 
 You can end a destructuring pattern with a rest property ...rest. This pattern will store all remaining properties of the object or array into a new object or array.
 
+## 22. rest and spread operator
+
+When you dont know that how many arguments are supplied to your function then you can use rest parameter there to accept those arguments.
+A function definition's last parameter can be prefixed with ... which will cause all remaining (user supplied) parameters to be placed within an Array object.
+
+```javascript
+function myFun(a, b, ...manyMoreArgs) {
+  console.log("a", a);
+  console.log("b", b);
+  console.log("manyMoreArgs", manyMoreArgs);
+}
+
+myFun("one", "two", "three", "four", "five", "six");
+
+// Console Output:
+// a, one
+// b, two
+// manyMoreArgs, ["three", "four", "five", "six"]
+```
+
+A function definition can only have one rest parameter, and the rest parameter must be the last parameter in the function definition.
+
+```javascript
+function wrong1(...one, ...wrong) {}
+function wrong2(...wrong, arg2, arg3) {}
+```
+## 23. rest parameter vs argument object
+### rest parameter:
+1. The arguments object is not a real array, while rest parameters are Array instances, meaning methods like sort(), map(), forEach() or pop() can be applied on it directly.
+2. The rest parameter bundles all the extra parameters into a single array, but does not contain any named argument defined before the ...restParam. The arguments object contains all of the parameters — including the parameters in the ...restParam array — bundled into one array-like object
+### spread syntax:
+The spread operator is just 3 dots ...
+It can be used on iterables like an array or a string.
+It expands an iterable to its individual elements
+It can provide a function call with an array (or any other iterable) where 0 or more arguments were expected.
+There are three distinct places that accept the spread syntax: 
+  1. Function arguments list:`(myFunction(a, ...iterableObj, b))`
+  2. Array literals:`([1, ...iterableObj, '4', 'five', 6])`
+  3. Object literals: `({ ...obj, key: 'value' })`
+  
+`Only` iterable objects, like Array, can be spread in array and function parameters. Many objects are not iterable, including all plain objects that lack a Symbol.iterator method:
+
+````javascript
+const obj = { key1: 'value1' };
+const array = [...obj]; // TypeError: obj is not iterable
+`````  
+
+On the other hand, spreading in object literals enumerates the own properties of the object. For typical arrays, all indices are enumerable own properties, so arrays can be spread into objects.
+
+
+````javascript
+const array = [1, 2, 3];
+const obj = { ...array }; // { 0: 1, 1: 2, 2: 3 }
+````` 
+### SeeAlso:
+  [Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#try_it)
+
 
