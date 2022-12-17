@@ -778,4 +778,86 @@ A function is a set of statements that take inputs, do some specific computation
 Arguments may be passed by value (in the case of primitive values) or by reference (in the case of objects).The this keyword does not refer to the currently executing function, so you must refer to Function objects by name, even within the function body.
 Functions created with the Function constructor do not create closures to their creation contexts; they always are created in the global scope. When running them, they will only be able to access their own local variables and global ones, not the ones from the scope in which the Function constructor was created.
 
+## 20. Getters and Setters:
+
+### Getters:
+
+Sometime you want to reflect over the status of internal variable without explicitly calling a method that can be accomplished with help of Getter.The get syntax binds an object property to a function that will be called when that property is looked up.
+
+```javascript
+const obj = {
+  log: ["a", "b", "c"],
+  get latest() {
+    return this.log[this.log.length - 1];
+  },
+};
+
+console.log(obj.latest);
+// expected output: "c"
+```
+
+Note the following when working with the get syntax:
+
+1. It can have an identifier which is either a number or a string;
+2. It must have exactly zero parameters
+3. It must not appear in an object literal with another get e.g. the following is forbidden
+
+```javascript
+    {
+      get x() { }, get x() { }
+    }
+```
+
+4. It must not appear with a data entry for the same property e.g. the following is forbidden
+
+```javascript
+    {
+      x: /* … */, get x() { /* … */ }
+    }
+```
+
+### Setters
+
+The set syntax binds an object property to a function to be called when there is an attempt to set that property.
+
+```javascript
+const language = {
+  set current(name) {
+    this.log.push(name);
+  },
+  log: [],
+};
+language.current = "EN";
+console.log(language.log); // ['EN']
+language.current = "FA";
+console.log(language.log); // ['EN', 'FA']
+```
+
+Note the following when working with the set syntax:
+
+1. It can have an identifier which is either a number or a string;
+2. It must have exactly one parameter
+
+## 21 destructuring
+
+The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+
+```javascript
+let a, b, rest;
+[a, b] = [10, 20];
+
+console.log(a);
+// expected output: 10
+
+console.log(b);
+// expected output: 20
+
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+
+console.log(rest);
+// expected output: Array [30,40,50]
+```
+
+You can end a destructuring pattern with a rest property ...rest. This pattern will store all remaining properties of the object or array into a new object or array.
+
 
