@@ -974,4 +974,41 @@ The primary reason to use an IIFE is to obtain data privacy because any variable
 })();
 console.log(message); //Error: message is not defined
 ````
+## 26. How do you decode or encode a URL in JavaScript
+For encoding and decoding purpuse we mainly uses UTF-8 format.UTF-8 means `Unicode Transformation Format - 8 bits`.It is an formate in which each code point will be assined memory and these codepoints are specific to each character for some character UTF-8 uses 1 byte ,for some 2 or 3 or for some also 4. We uses mailnt UTF-8 because it decreases your file size as much as it can.
+
+`encodeURI()` function is used to encode an URL. This function requires a URL string as a parameter and return that encoded string.
+
+`decodeURI() `function is used to decode an URL. This function requires an encoded URL string as parameter and return that decoded string.
+
+````text
+Note: If you want to encode characters such as / ? : @ & = + $ # then you need to use encodeURIComponent(). 
+````
+````javascript
+let uri = "employeeDetails?name=john&occupation=manager";
+let encoded_uri = encodeURI(uri);
+let decoded_uri = decodeURI(encoded_uri);
+````
+## 27. What is memoization
+In programming, memoization is an optimization technique that makes applications more efficient and hence faster. It does this by storing computation results in cache, and retrieving that same information from the cache the next time it's needed instead of computing it again.
+````javascript
+// without memoization
+  //we're executing fib(0), fib(1), fib(2) and fib(3) multiple times
+const fib = n => {
+  if (n <= 1) return 1
+  return fib(n - 1) + fib(n - 2)
+}
+fib(5)// 120
+
+// with memoization
+//we're not executing fib(0), fib(1), fib(2) and fib(3) multiple times we stores them first time as we calculated them
+const fib = (n, memo) => {
+  memo = memo || {} 
+    if (memo[n]) return memo[n] 
+    if (n <= 1) return 1
+    return memo[n] = fib(n-1, memo) + fib(n-2, memo)
+}  
+fib(5)// 120
+````
+
 
