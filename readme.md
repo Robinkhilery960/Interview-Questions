@@ -725,5 +725,57 @@ var notHoisted = function () {
   console.log("bar");
 };
 ```
+## 18. What is Temporal Dead Zone
+
+TDZ describe a state for let and const , where they are in scope but they cannot be accessed before they are declared .
+
+```javascript
+{
+  // This is the temporal dead zone for the age variable!
+  // This is the temporal dead zone for the age variable!
+  let age = 25; // Whew, we got there! No more TDZ
+  console.log(age);
+}
+```
+
+### What's the difference between declaring and initialising?
+
+Declaring a variable means we reserve the name in memory at the current scope. That is labelled 1 in the comments.
+
+Initialising a variable is setting the value of the variable. That is labelled 2 in the comments.
+
+```javascript
+function scopeExample() {
+
+    let age; // 1
+    age = 20; // 2
+    let hands = 2; // 3
+
+```
+
+### Why TDZ Happens ?
+
+When variables get hoisted, var gets undefined initialized to its value by default in the process of hoisting. let and const also get hoisted, but don't get set to undefined when they get hoisted.
+The only difference between const and let is that when they are hoisted, their values don't get defaulted to undefined.
+
+Just to prove let and const also hoist, here's an example:
+
+```javascript
+{
+  // Both the below variables will be hoisted to the top of their scope!
+  console.log(typeof nonsenseThatDoesntExist); // Prints undefined
+  console.log(typeof name); // Throws an error, cannot access 'name' before initialization
+
+  let name = "Kealan";
+}
+```
+
+The above snippet is proof that let is clearly hoisted above where it was declared, as the engine alerts us to the fact. It knows name exists (it's declared), but we can't access it before it is initialized.
+
+## 19. Funtions
+
+A function is a set of statements that take inputs, do some specific computation, and produce output.In JavaScript, functions are first-class objects, because they can have properties and methods just like any other object. What distinguishes them from other objects is that functions can be called. In brief, they are Function objects.For constructer function default return value is `this` keyword and for other function it is undefined.
+Arguments may be passed by value (in the case of primitive values) or by reference (in the case of objects).The this keyword does not refer to the currently executing function, so you must refer to Function objects by name, even within the function body.
+Functions created with the Function constructor do not create closures to their creation contexts; they always are created in the global scope. When running them, they will only be able to access their own local variables and global ones, not the ones from the scope in which the Function constructor was created.
 
 
