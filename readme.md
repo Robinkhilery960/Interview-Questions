@@ -585,7 +585,8 @@ add(2, 4); // 6
 ```
 
 ## 16. let, var and const
-
+### Scope:
+Scope refers to the part of a program where we can access a variable
 ### var :
 
 Variables declared with var keyword are either function scoped or global scope depending upon where they are declared.Initializtion of variables is optional.
@@ -1139,3 +1140,85 @@ display(gorilla.dailyRoutine());
 // George is eating! George is pounding its chest!
 // George is waking up! George is pounding its chest! George is eating! George is going to sleep!
 ````
+## 29. Modules
+JavaScript modules allow you to break up your code into separate files. This makes it easier to maintain the code-base.JavaScript modules rely on the `import` and `export` statements.
+Modules increase Maintainability,Reusability and
+Namespacing of your code. 
+### CommonJS modules and ES modules
+### CommonJS:
+By default, Node.js treats JavaScript code as CommonJS modules. Because of this, CommonJS modules are characterized by the require() statement for module imports and module.exports for module exports.
+````javascript
+module.exports.add = function(a, b) {
+        return a + b;
+} 
+
+module.exports.subtract = function(a, b) {
+        return a - b;
+}
+````
+We can also import the public functions into another Node.js script using require(), just as we do here:
+
+````javascript
+const {add, subtract} = require('./util')
+
+console.log(add(5, 5)) // 10
+console.log(subtract(10, 5)) // 5
+````
+### ES Module:
+We can also simply enable ES modules in a Node.js package by changing the file extensions from .js to .mjs.
+````javAscript
+export function add(a, b) {
+        return a + b;
+}
+
+export function subtract(a, b) {
+        return a - b;
+}
+````
+We can then import both functions using the import statement:
+````javascript
+// app.mjs
+
+import {add, subtract} from './util.mjs'
+
+console.log(add(5, 5)) // 10
+console.log(subtract(10, 5)) // 5
+````
+Another way to enable ES modules in your project can be done by adding a "type: module" field inside the nearest package.json file (the same folder as the package you’re making):
+### See Also  [CommonJS vs ES](https://blog.logrocket.com/commonjs-vs-es-modules-node-js/)
+
+## 30. Cookies:
+Cookies are key value pair that are stored on your website by a browser that can be used  to better a user's web experience. 
+````javascript
+//set a cookie on the client side
+document.cookie = 'dark_mode=true'
+
+// set an expiration date on a cookie    
+document.cookie = 'dark_mode=true; expires= 25 Dec 2022 00:00:00 GMT' // expires 1 week from now
+
+// OR
+
+document.cookie = 'dark_mode=true; max-age=604800'; // expires 1 week from now
+
+// update a cookie 
+document.cookie = "dark_mode=false; max-age=604800"; // expires 1 week from now
+
+// set the path for a cookie 
+document.cookie = 'dark_mode=true; path=/about';
+
+//delete a cookie
+document.cookie = 'dark_mode=true; expires= 11 Dec 2022 00:00:00 GMT'// 1 week earlier
+
+//OR
+
+document.cookie = 'dark_mode=true; max-age=-60'; // 1 minute earlier
+
+````
+### Cookie Limitations:
+1. Cookies are quite limited compared to some modern alternatives to storing data in the browser like localStorage or sessionStorage and their small size makes it easy for the browser to send cookies with each request to the server. browsers only allow cookies to work from one domain for security reasons.
+
+2. Man-in-the-middle attacks:[Read Here](https://www.invicti.com/blog/web-security/man-in-the-middle-attack-how-avoid/)
+3. Cross Site Scripting: [Read Here](https://portswigger.net/web-security/cross-site-scripting)
+4. CSRF attacks:[Read Here](https://portswigger.net/web-security/csrf)
+### Read Also:[Click here](https://www.freecodecamp.org/news/everything-you-need-to-know-about-cookies-for-web-development/)
+
