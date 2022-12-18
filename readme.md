@@ -1269,3 +1269,16 @@ const sessionArr=["a", "b", "c", "d", "e"]
 sessionStorage.setItem("arr",JSON.stringify(sessionArr))
 console.log(JSON.parse(sessionStorage.getItem("arr"))) 
 ````
+ ## 32.IndexDB
+ An non-rational key value database  for client side tp storage significant amounts of structured data, including files/blobs. 
+ Advantages of IndexDB:
+ 1. IndexedDB is asynchronous, meaning it does not stop the user interface from rendering while the data loads.
+2. It allows you to categorise your data using object stores.
+3. It allows you to store large amounts of data.
+4. It supports objects like videos, images, and so on – any object that supports a structured clone algorithm.
+5. It supports database transactions and versioning.
+6. It has great performance.
+7. The database is private to an origin.
+8. It is supported on all modern browsers.
+### IndexDB Working:
+Window.indexDB property's open method request for opening a connection to database
