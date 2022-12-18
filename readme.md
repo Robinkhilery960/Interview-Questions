@@ -1222,3 +1222,50 @@ document.cookie = 'dark_mode=true; max-age=-60'; // 1 minute earlier
 4. CSRF attacks:[Read Here](https://portswigger.net/web-security/csrf)
 ### Read Also:[Click here](https://www.freecodecamp.org/news/everything-you-need-to-know-about-cookies-for-web-development/)
 
+## 31. Web Storage API:
+Web Storage  provides you two mechanisms   sessionStorage and localStorage that maintains a separate storage area for each given origin.
+Local storage and session Storage are a properies of  window object that are used to access storage object and storage object is used to acess current origin's storage area  by the defined methods
+### local Storage Vs Session Storage:-
+ sessionStorage: 
+ 1. storage area is available for the duration of the page session (as long as the browser is open, including page reloads and restores).
+2. Stores data only for a session, meaning that the data is stored until the browser (or tab) is closed.
+3. Data is never transferred to the server.
+Storage limit is larger than a cookie (at most 5MB).
+localStorage:
+ 1. It persist even when the browser is closed and reopened.
+2. Stores data with no expiration date, and gets cleared only through JavaScript, or clearing the Browser cache / Locally Stored Data.
+3. Storage limit is the maximum amongst the two.
+````javascript
+// local storage
+// set item in local storage
+localStorage.setItem("name","robin")
+localStorage.setItem("myFriend","sunil")
+// get item from local storage
+localStorage.getItem("name") 
+ // remove item from local storage
+localStorage.removeItem("name")
+// to clear local storage
+localStorage.clear()
+ // store array in local storage
+const arr=[1, 2, 3, 4, 5]
+// make array a string and store 
+localStorage.setItem("arr",JSON.stringify(arr))
+// get back array and parse back 
+localStorageOutput=JSON.parse(localStorage.getItem("arr")) 
+
+
+//session storage'
+// set item to session storage
+sessionStorage.setItem("name","sunil") 
+sessionStorage.setItem("myFriend","robin") 
+// get item from session storage
+sessionStorage.getItem("name") 
+// remobe item from session storage
+sessionStorage.removeItem("name")
+// clear session storage 
+sessionStorage.clear() 
+// store an array in  session storage 
+const sessionArr=["a", "b", "c", "d", "e"] 
+sessionStorage.setItem("arr",JSON.stringify(sessionArr))
+console.log(JSON.parse(sessionStorage.getItem("arr"))) 
+````
