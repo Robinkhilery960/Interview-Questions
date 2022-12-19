@@ -1376,3 +1376,44 @@ Started request…
 Received response: 200
  */ 
 ````
+
+### Transition from callbacks to promise based
+Tradiotnal callback  :
+In callback they are called when a perticular task has given you output either it result or it is an error you callback will be called so the point is callbacks are executed after a certain time of interval with the result value the same cab be achevied through promises how instead of gicing thesse output values to the callback directly what happens if if gave them to promies and when i reaceive a value from the async function I can use that value by attaching some handlers over it this whole work of  tieing outcome to a promise from a callback is done by executer function that is a solo paramter for the Promise constructer.
+````javascript
+readFile("hello.text",(error,result)=>{
+// this code will execute only after file is read and you got either the result or error
+})
+// this part of code won't wait for you to read file making it as asynchronous function
+````
+### Creating Promises:
+Syntax:
+````javascript
+new Promise(executor) 
+````
+FLOW:
+1. Whenever your Promise constructer actually create new promise object at that time it also creates two function called resolve and reject functions those are bind to your newly created promise object.
+2. Inside the executer function you actually do your Asynchronous task with the help of callback - yes we ueses here callback you cannot avoid callbacks - these callbacks are actually defined inside your executer function so these have access to resolve and reject functions.
+3. As soon as a promise is created with promise constructer this executer function is called `synchronously` with argumets as resolve and reject functions
+4. Eventual completetion of the asynchrounous function will be communicated with the promise instace by your resolve and reject method.  
+4.a Once you called any of resolve or reject function your promise get resolve after that whatever number of time you want to call thses functions your promise state wont change 
+
+    4.b Promise resolve does not mean that its state will be either fulfilled or rejected it can be pending also depends upon what you have send as paramter to resolve function if you have sent a new promise then its state will still remain dependend on state of new promise
+
+5. Once your promise get settled it will call further handlers attached to it like then and catch and will pass them fullfilled value or rejection reson as input  
+  
+````javascript
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('foo');
+  }, 300);
+});
+
+promise1.then((value) => {
+  console.log(value);
+  // expected output: "foo"
+});
+
+console.log(promise1);
+// expected output: [object Promise]
+````
