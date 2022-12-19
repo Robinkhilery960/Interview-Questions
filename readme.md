@@ -1417,3 +1417,26 @@ promise1.then((value) => {
 console.log(promise1);
 // expected output: [object Promise]
 ````
+
+### Async-await:
+Till now to do  async task we were returning promises from the function that will hold our outcome of async task.Now what about instead of returning a promises from as function we make function as async.
+Using async keyword we can make our function asynchrounous that will still return our promise but here plus point is that you dont have to use then chaining you can use await keyword that will suspend the code flow in your async function till the time your function is not resolved you can use 0 or more then 0 await in your async function 
+````javascript
+function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: "resolved"
+}
+
+asyncCall();
+````
+
