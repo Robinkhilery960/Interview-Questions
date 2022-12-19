@@ -1280,5 +1280,99 @@ console.log(JSON.parse(sessionStorage.getItem("arr")))
 6. It has great performance.
 7. The database is private to an origin.
 8. It is supported on all modern browsers.
-### IndexDB Working:
-Window.indexDB property's open method request for opening a connection to database
+ ````javascript
+ // a global object that gives to acess og databse - connect to databse with aits open method 
+const indexDB = window.indexedDB;  
+
+let db;
+// request object   given to you immediately and opeing of databse goes async
+const requestObject = indexedDB.open("todo");
+
+requestObject.onupgradeneeded = (e) => {  
+    // called when databse already dont exist or databse version greater then current version
+  db = requestObject.result;
+  // creating a object store and providing a unique key in option that will help to find objects
+  db.createObjectStore("personalNotes", { keyPath: "title" });
+  db.createObjectStore("workNotes", { keyPath: "title" });
+};
+
+// thtis sucess function will be called everytime till provided version >= current version 
+requestObject.onsuccess = (e) => { 
+  db = requestObject.result; 
+  // add note to object store
+  addNote()
+};
+
+const addNote=()=>{
+    // create a note
+    const note={
+        title:"note1",
+        text:"i am first note"
+    } 
+    // open a transcation on a object store and mention mode of transction
+    const tx=db.transaction("personalNotes","readwrite")
+    // get that object store
+    const personalNotes=tx.objectStore("personalNotes")
+    // made a request to add a new note to obejct store
+    const storeRequest=personalNotes.add(note)
+
+    storeRequest.onsuccess=()=>{
+        console.log("note added sucessfully")
+    }
+}
+
+// reterive data from index db 
+// loading takes some time so use settimeout 
+setTimeout(()=>{
+    if(db){
+        // open a transcation on a object store and mention mode of transction
+        const tx=db.transaction("personalNotes","readonly")
+        // get that object store
+        const personalNotes=tx.objectStore("personalNotes")
+        // made a request to get data obejct store
+        const storeRequest=personalNotes.getAll()
+        storeRequest.onsuccess=(e)=>{
+            console.log( e.target.result)
+        }
+    }
+},100)
+````
+## 33. Aynsc Javascript
+Asynchronous programming is a form of parallel programming that does not blocks your code flow means your multiple tasks can be done at a time. 
+To perform asynchronous programming in javascript we specially uses 3 thngs callbacks ,promises and async-await .
+1. callbacks function:A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
+### Callback hell
+Nesting multiple callbacks within a function is called a callback hell.It makes the code very difficult to understand and maintain.call-back hell  and inversion of control - control, of your code is not in your hand  you  are actually giving your function to an anther function that is not written by you and you are expecting that magically that outer function will call you inner
+ function after  a certain time, but   is the guaranteed that it will only call it once or what is guarantee that it will call even once?
+````javascript
+firstFunction(function(){
+    secondFunction(function(){
+        thirdFunction(function(){
+            // And so on  
+        })
+    }) 
+  })
+  ````
+### Promise:
+Promise is a object that represents the eventual completion or failure of a asynchronous function  
+Asynchronous function will start its operation and it will return you a promise object , and through this promise object you can add handlers on eventual state of promise.It will be in one of the 3 possible states: fulfilled, rejected, or pending.
+````javascript
+// fetch an sdync operation return a promise object to you 
+const fetchPromise = fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json');
+// intial state of this promise will be pending
+console.log(fetchPromise);
+// when promise will be resolved this means that your fetch function  do its work suceessfully without errors then a then method is called on fulfilled state of promise
+// response object will be send to this handler
+fetchPromise.then((response) => {
+  console.log(`Received response: ${response.status}`);
+}).catch((error) => { // error handling 
+  console.error(`Could not get products: ${error}`);
+  });; 
+console.log("Started request…"); 
+/* 
+o/p: 
+Promise { <state>: "pending" }
+Started request…
+Received response: 200
+ */ 
+````
