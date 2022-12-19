@@ -1478,3 +1478,108 @@ This can be encountered when:
 5.InternalError:
 
 Creates an instance representing an error that occurs when an internal error in the JavaScript engine is thrown. E.g. "too much recursion"
+ 
+## 35. String
+1. String.prototype.at() and  String.prototype.charAt() Returns the character (exactly one UTF-16 code unit) at the specified index
+2. String.prototype.charCodeAt():Returns a number that is the UTF-16 code unit value at the given index
+3. String.prototype.concat():
+The concat() method concatenates the string arguments to the calling string and returns a new string.
+````javascript
+const str1 = 'Hello';
+const str2 = 'World';
+
+console.log(str1.concat(' ', str2));
+// expected output: "Hello World"
+
+console.log(str2.concat(', ', str1));
+// expected output: "World, Hello"
+````
+4. String.prototype.includes():
+The includes() method performs a case-sensitive search to determine whether one string may be found within another string, returning true or false as appropriate.
+````javascript
+const sentence = 'The quick brown fox jumps over the lazy dog.';
+
+const word = 'fox';
+
+console.log(`The word "${word}" ${sentence.includes(word) ? 'is' : 'is not'} in the sentence`);
+// expected output: "The word "fox" is in the sentence"
+
+````
+5. String.prototype.indexOf():
+The indexOf() method, given one argument: a substring to search for, searches the entire calling string, and returns the index of the first occurrence of the specified substring. 
+6. String.prototype.lastIndexOf():
+Returns the index within the calling String object of the last occurrence of searchValue, or -1 if not found.
+````javascript
+const paragraph = 'The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?';
+
+const searchTerm = 'dog';
+
+console.log(`The index of the first "${searchTerm}" from the end is ${paragraph.lastIndexOf(searchTerm)}`);
+// expected output: "The index of the first "dog" from the end is 52"  
+````
+7.String.prototype.match():
+The match() method retrieves the result of matching a string against a regular expression. 
+````javascript
+const paragraph = 'The quick brown fox jumps over the lazy dog. It barked.';
+const regex = /[A-Z]/g;
+const found = paragraph.match(regex);
+
+console.log(found);
+// expected output: Array ["T", "I"]
+ 
+````
+
+8.String.prototype.replace():
+The replace() method returns a new string with one, some, or all matches of a pattern replaced by a replacement.
+````javascript
+const p = 'The quick brown fox jumps over the lazy dog. If the dog reacted, was it really lazy?';
+
+console.log(p.replace('dog', 'monkey'));
+// expected output: "The quick brown fox jumps over the lazy monkey. If the dog reacted, was it really lazy?"
+
+
+const regex = /Dog/i;
+console.log(p.replace(regex, 'ferret'));
+// expected output: "The quick brown fox jumps over the lazy ferret. If the dog reacted, was it really lazy?" 
+````
+9. String.prototype.slice():
+The slice() method extracts a section of a string and returns it as a new string, without modifying the original string.
+````javascript
+const str = 'The quick brown fox jumps over the lazy dog.';
+
+console.log(str.slice(31));
+// expected output: "the lazy dog."
+
+console.log(str.slice(4, 19));
+// expected output: "quick brown fox"
+
+console.log(str.slice(-4));
+// expected output: "dog."
+
+console.log(str.slice(-9, -5));
+// expected output: "lazy"
+ 
+````
+10. String.prototype.split():
+The split() method takes a pattern and divides a String into an ordered list of substrings by searching for the pattern, puts these substrings into an array, and returns the array.
+````javascript
+const str = 'The quick brown fox jumps over the lazy dog.';
+
+const words = str.split(' ');
+console.log(words[3]);
+// expected output: "fox"
+
+const chars = str.split('');
+console.log(chars[8]);
+// expected output: "k"
+
+const strCopy = str.split();
+console.log(strCopy);
+// expected output: Array ["The quick brown fox jumps over the lazy dog."] 
+````
+11. String.prototype.toUpperCase()
+Returns the calling string value converted to uppercase.
+
+12. String.prototype.trim()
+Trims whitespace from the beginning and end of the string.
+
