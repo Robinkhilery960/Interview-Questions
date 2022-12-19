@@ -1440,3 +1440,41 @@ async function asyncCall() {
 asyncCall();
 ````
 
+## 34. Error
+### Exception handling statements:
+1. throw statement 
+````javascript
+// syntax
+throw Expression
+
+throw 'Error2';   // String type
+throw 42;         // Number type
+throw true;       // Boolean type
+throw {toString() { return "I'm an object!"; } };
+````
+2. try..catch block:
+
+ you want the try block to succeed—but if it does not, you want control to pass to the catch block. If any statement within the try block (or in a function called from within the try block) throws an exception, control immediately shifts to the catch block. If no exception is thrown in the try block, the catch block is skipped. The finally block executes after the try and catch blocks execute but before the statements following the try...catch statement.
+ ### ErrorTypes:
+ 1. ReferenceError:
+ The ReferenceError object represents an error when a variable that doesn't exist (or hasn't yet been initialized) in the current scope is referenced.
+ 2. SyntaxError:The SyntaxError object represents an error when trying to interpret syntactically invalid code.
+ 3. TypeError:
+ A TypeError may be thrown when:
+
+1. an operand or argument passed to a function is 
+2.incompatible with the type expected by that operator or function; or
+3. when attempting to modify a value that cannot be changed; or
+4. when attempting to use a value in an inappropriate way.
+ 4. RangeError:
+ A RangeError is thrown when trying to pass a value as an argument to a function that does not allow a range that includes the value.
+
+This can be encountered when:
+
+1. passing a value that is not one of the allowed string values to String.prototype.normalize(), or
+2. when attempting to create an array of an illegal length with the Array constructor, or
+3. when passing bad values to the numeric methods Number.prototype.toExponential(), Number.prototype.toFixed() or Number.prototype.toPrecision(). 
+
+5.InternalError:
+
+Creates an instance representing an error that occurs when an internal error in the JavaScript engine is thrown. E.g. "too much recursion"
