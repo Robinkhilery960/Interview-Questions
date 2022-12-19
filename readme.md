@@ -1583,3 +1583,75 @@ Returns the calling string value converted to uppercase.
 12. String.prototype.trim()
 Trims whitespace from the beginning and end of the string.
 
+## 36. Array
+Array object allows you to store multiple values in a single variable.
+In JavaScript, arrays aren't primitives but are instead Array objects with the following core characteristics:
+1. JavaScript arrays are resizable and can contain a mix of different data types. (When those characteristics are undesirable, use typed arrays instead.)
+2. JavaScript arrays are not associative arrays and so, array elements cannot be accessed using arbitrary strings as indexes, but must be accessed using nonnegative integers (or their respective string form) as indexes.
+3. JavaScript arrays are zero-indexed: the first element of an array is at index 0, the second is at index 1, and so on — and the last element is at the value of the array's length property minus 1.
+4. JavaScript array-copy operations create shallow copies. (All standard built-in copy operations with any JavaScript objects create shallow copies, rather than deep copies).
+
+````javascript
+console.log(arr.0); // a syntax error
+````
+JavaScript syntax requires properties beginning with a digit to be accessed using bracket notation instead of dot notation. It's also possible to quote the array indices (e.g., years['2'] instead of years[2]), although usually not necessary.
+The 2 in years[2] is coerced into a string by the JavaScript engine through an implicit toString conversion. As a result, '2' and '02' would refer to two different slots on the years object, and the following example could be true:
+````javascript
+console.log(years["2"] !== years["02"]); 
+````
+Only years['2'] is an actual array index. years['02'] is an arbitrary string property that will not be visited in array iteration.
+
+````javascript
+
+const fruits = [];
+fruits.push("banana", "apple", "peach");
+console.log(fruits)
+console.log(fruits.length); // 3
+fruits[5] = "mango";
+console.log(fruits)
+console.log(fruits[4]); // 'undefined'
+console.log(fruits[5]); // 'mango'
+console.log(Object.keys(fruits)); // ['0', '1', '2', '5']
+console.log(fruits.length); // 6
+
+// Increasing the length.
+fruits.length = 10;
+console.log(fruits); // ['banana', 'apple', 'peach', empty x 2, 'mango', empty x 4]
+console.log(Object.keys(fruits)); // ['0', '1', '2', '5']
+console.log(fruits.length); // 10
+console.log(fruits[8]); // undefined
+
+// Decreasing the length property does, however, delete elements.
+fruits.length = 2;
+console.log(Object.keys(fruits)); // ['0', '1']
+console.log(fruits.length); // 2
+````
+
+### Array Properties:
+1. Array.prototype.length
+Reflects the number of elements in an array.
+### Array Methods:
+1. Array.isArray(): 
+Returns true if the argument is an array, or false otherwise.
+2. Array.of():
+The Array.of() method creates a new Array instance from a variable number of arguments, regardless of number or type of the arguments.
+````javascript
+Array.of(7); // [7]
+Array(7); // array of 7 empty slots
+
+Array.of(1, 2, 3); // [1, 2, 3]
+Array(1, 2, 3); // [1, 2, 3] 
+````
+3. Array.prototype.copyWithin():
+The copyWithin() method shallow copies part of an array to another location in the same array and returns it without modifying its length.
+4. Array.prototype.every():
+
+## Functional Programming
+##  Function 
+## Objects 
+## strict mode 
+## undefined va null 
+## Dom lifecycle 
+## same-origin policy
+## Javascript Nature
+## Polyfills
