@@ -1772,8 +1772,59 @@ USES:
 1. print content of array
 2. iterate over array and can also modify array not by itself but by callback function 
 3. If you wanted to run an callback on each item of array  
+37. ## for-in and for-of 
+### for-of:
+The for...of statement executes a loop that operates on a sequence of values sourced from an iterable object. 
+````javascript
+const array1 = ['a', 'b', 'c'];
 
-## Functional Programming
+for (const element of array1) {
+  console.log(element);
+}
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+````
+When a for...of loop iterates over an iterable, it first calls the iterable's iterator() method, which returns an iterator, and then repeatedly calls the resulting iterator's next() method to produce the sequence of values to be assigned to variable.
+
+A for...of loop exits when the iterator has completed (the iterator's next() method returns an object containing done: true). You may also use control flow statements to change the normal control flow. break exits the loop and goes to the first statement after the loop body, while continue skips the rest of the statements of the current iteration and proceeds to the next iteration.
+
+If the for...of loop exited early (e.g. a break statement is encountered or an error is thrown), the return() method of the iterator is called to perform any cleanup
+
+ **NOTE**:You can also interate over object using for of loop all you need to do is to define an iterator method in that object.
+### for-in: 
+The for...in statement iterates over all enumerable string properties of an object (ignoring properties keyed by symbols), including inherited enumerable properties.
+````javascript
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`);
+}
+
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
+
+}
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+````
+The loop will iterate over all enumerable properties of the object itself and those the object inherits from its prototype chain (properties of nearer prototypes take precedence over those of prototypes further away from the object in its prototype chain).
+
+A for...in loop only iterates over enumerable, non-symbol properties. Objects created from built–in constructors like Array and Object have inherited non–enumerable properties from Array.prototype and Object.prototype, such as Array's indexOf() method or Object's toString() method, which will not be visited in the for...in loop.
+
+The traversal order, as of modern ECMAScript specification, is well-defined and consistent across implementations. Within each component of the prototype chain, all non-negative integer keys (those that can be array indices) will be traversed first in ascending order by value, then other string keys in ascending chronological order of property creation
+### Array iteration and for...in:
+Array indexes are just enumerable properties with integer names and are otherwise identical to general object properties. The for...in loop will traverse all integer keys before traversing other keys, and in strictly increasing order, making the behavior of for...in close to normal array iteration. However, the for...in loop will return all enumerable properties, including those with non–integer names and those that are inherited. Unlike for...of, for...in uses property enumeration instead of the array's iterator. In sparse arrays, for...of will visit the empty slots, but for...in will not.
+
+It is better to use a for loop with a numeric index, Array.prototype.forEach(), or the for...of loop, because they will return the index as a number instead of a string, and also avoid non-index properties.
+
+
+## Polyfills
 ##  Function 
 ## Objects 
 ## strict mode 
@@ -1781,6 +1832,10 @@ USES:
 ## Dom lifecycle 
 ## same-origin policy
 ## Javascript Nature
-## Polyfills
 ## execution context
 ## callstack 
+## single threaded vs Multi threaded
+## Java vs Javascript 
+## Event loop
+## RegExp
+## Set
