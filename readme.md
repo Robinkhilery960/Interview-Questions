@@ -1631,20 +1631,147 @@ console.log(fruits.length); // 2
 1. Array.prototype.length
 Reflects the number of elements in an array.
 ### Array Methods:
-1. Array.isArray(): 
+### 1. Array.isArray():  
 Returns true if the argument is an array, or false otherwise.
-2. Array.of():
-The Array.of() method creates a new Array instance from a variable number of arguments, regardless of number or type of the arguments.
-````javascript
-Array.of(7); // [7]
-Array(7); // array of 7 empty slots
+ ### 2. Array.prototype.map():
 
-Array.of(1, 2, 3); // [1, 2, 3]
-Array(1, 2, 3); // [1, 2, 3] 
+The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
+````javascript 
+const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map(x => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+
 ````
-3. Array.prototype.copyWithin():
-The copyWithin() method shallow copies part of an array to another location in the same array and returns it without modifying its length.
-4. Array.prototype.every():
+Return value:
+
+A new array with each element being the result of the callback function.
+Calling map() on non-array objects:
+
+The map() method reads the length property of this and then accesses each integer index.
+````javascript
+const arrayLike = {
+  length: 3,
+  0: 2,
+  1: 3,
+  2: 4,
+};
+console.log(Array.prototype.map.call(arrayLike, (x) => x ** 2));
+// [ 4, 9, 16 ]
+
+````
+ ### 3. Array.prototype.filter()
+
+The filter() method creates a shallow copy of a portion of a given array, filtered down to just the elements from the given array that pass the test implemented by the provided function.
+````javascript
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+
+````
+Return value:
+
+A shallow copy of a portion of the given array, filtered down to just the elements from the given array that pass the test implemented by the provided function. If no elements pass the test, an empty array will be returned.
+
+    USES:
+    1. Search in an array  and can return that  
+    
+### 4. Array.prototype.reduce():
+
+The reduce() method executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of the array is a single value.
+````javascript 
+// reduce(callbackFn, initialValue)
+const array1 = [1, 2, 3, 4];
+
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue
+);
+
+console.log(sumWithInitial);
+// expected output: 10
+
+````
+The reduce() method is an iterative method. It runs a "reducer" callback function over all elements in the array, in ascending-index order, and accumulates them into a single value. Every time, the return value of callbackFn is passed into callbackFn again on next invocation as accumulator. The final value of accumulator (which is the value returned from callbackFn on the final iteration of the array) becomes the return value of reduce().
+
+callbackFn is invoked only for array indexes which have assigned values. It is not invoked for empty slots in sparse arrays.
+
+Unlike other iterative methods, reduce() does not accept a thisArg argument. callbackFn is always called with undefined as this, which gets substituted with globalThis if callbackFn is non-strict.
+
+Edge cases:
+
+If the array only has one element (regardless of position) and no initialValue is provided, or if initialValue is provided but the array is empty, the solo value will be returned without calling callbackFn.
+
+If initialValue is provided and the array is not empty, then the reduce method will always invoke the callback function starting at index 0.
+
+If initialValue is not provided then the reduce method will act differently for arrays with length larger than 1, equal to 1 and 0, as shown in the following example:
+Return value:
+
+The value that results from running the "reducer" callback function to completion over the entire array.
+
+USES: 
+
+1.Flatten an array - 2D To 1D
+````javascript
+const flattened = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+].reduce((accumulator, currentValue) => accumulator.concat(currentValue), []);
+// flattened is [0, 1, 2, 3, 4, 5]
+
+````
+2. Grouping objects by a property
+3. remove duplicate in an array 
+3. Replace .filter().map() with .reduce()
+
+### 5. Array.prototype.forEach()
+The forEach() method executes a provided function once for each array element.
+````javascript
+const array1 = ['a', 'b', 'c'];
+
+array1.forEach(element => console.log(element));
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+````
+callbackFn is invoked only for array indexes which have assigned values. It is not invoked for empty slots in sparse arrays.
+forEach() does not mutate the array on which it is called, but the function provided as callbackFn can. Note, however, that the length of the array is saved before the first invocation of callbackFn. Therefore:
+
+callbackFn will not visit any elements added beyond the array's initial length when the call to forEach() began.
+Changes to already-visited indexes do not cause callbackFn to be invoked on them again.
+If an existing, yet-unvisited element of the array is changed by callbackFn, its value passed to the callbackFn will be the value at the time that element gets visited. Deleted elements are not visited.
+Return value: 
+undefined so  not chainable. 
+forEach() expects a synchronous function — it does not wait for promises. Make sure you are aware of the implications while using promises (or async functions) as forEach callbacks.
+````javascript
+const ratings = [5, 4, 5];
+let sum = 0;
+
+const sumFunction = async (a, b) => a + b;
+
+ratings.forEach(async (rating) => {
+  sum = await sumFunction(sum, rating);
+});
+
+console.log(sum);
+// Naively expected output: 14
+// Actual output: 0
+
+````
+USES:
+1. print content of array
+2. iterate over array and can also modify array not by itself but by callback function 
+3. If you wanted to run an callback on each item of array  
 
 ## Functional Programming
 ##  Function 
@@ -1655,3 +1782,5 @@ The copyWithin() method shallow copies part of an array to another location in t
 ## same-origin policy
 ## Javascript Nature
 ## Polyfills
+## execution context
+## callstack 
