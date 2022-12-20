@@ -1823,6 +1823,14 @@ Array indexes are just enumerable properties with integer names and are otherwis
 
 It is better to use a for loop with a numeric index, Array.prototype.forEach(), or the for...of loop, because they will return the index as a number instead of a string, and also avoid non-index properties.
 
+## 38. Functional Programming
+ A programming paradigm is essentially a bunch of rules that you follow when writing code.
+ If you're coding in a language that follows the imperative/procedural paradigm, you write code that tells how to do something.You can write JavaScript in the Declarative paradigm or the Imperative paradigm. This is what people mean when they say it's a multi-paradigm language. 
+1. keep ypur data and your functin seperate - pure function 
+2. tou dont update a variable again and again instaed you  delacre a new variale and put that new value in that 
+3. Function are treated as first class obeject 
+### WHY YOU DO THAT ?
+
 
 ## Polyfills
 ##  Function 
