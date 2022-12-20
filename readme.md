@@ -1843,11 +1843,62 @@ Symbol("foo") === Symbol("foo"); // false
 
 // The following syntax with the new operator will throw a TypeError:
 //  It is not a constructor in the traditional sense, because it can only be called as a function, instead of being constructed with new Symbol().
-const sym = new Symbol(); // TypeError
-
-
+const sym = new Symbol(); // TypeError 
 ````
-## Polyfills
+
+## 40. Polyfills
+A polyfill is a piece of code   used to provide modern functionality on older browsers that do not natively support it.
+### map polyfill: 
+````javascript
+// 1. Fiest chek does your browser have   map function or not already if not only then write your map function 
+if(typeof Array.prototype.map !== "function"){
+  // here create your map function 
+}
+// 2. Apply some checks on your arguemnts 
+if(typeof Array.prototype.map !== "function"){
+  // dont use arrow function here 
+   Array.prototype.myMap=function(callback,thisArg){
+    if(typeof callback !== "function") return
+    // apply check for array like object length property 
+    if(typeof this.length !== "number") return 
+    const arr=[]
+    //this argument should be object or if not you can change that to object using Object constructer  
+    if(typeof thisArg ==="object"){
+      // we will be calling callback function for every entry of array object so let make a loop 
+      for(let i=0;i<this.length;i++){ 
+        // i represent property of array object  so check if  it exist  only then proceed  
+        if(i in this){
+          // for node js you might have to add more constions 
+          const outcome=callback.call(thisArg||this,this[i],i,this)
+          arr.push(outcome)
+        }else{
+          return 
+        }
+      }
+    }
+    return arr
+   }
+}
+// for array 
+const arr=[1, 2, 3, 4]
+const newArr=arr.myMap((value,index,arr)=>{ 
+    return value*10
+})
+ console.log(newArr) //[ 10, 20, 30, 40 ]
+ // for array like object 
+ const obj={
+    length:3, 
+    0:2,
+    1:3,
+    2:9
+}
+const newObj=Array.prototype.myMap.call(obj,(value,index,obj)=>{ 
+    return value*10
+} )
+console.log(newObj)//[ 20, 30, 90 ]
+````
+### filter 
+### reduce 
 ##  Function 
 ## Objects 
 ## strict mode 
