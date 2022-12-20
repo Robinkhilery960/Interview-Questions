@@ -1831,7 +1831,22 @@ It is better to use a for loop with a numeric index, Array.prototype.forEach(), 
 3. Function are treated as first class obeject 
 ### WHY YOU DO THAT ?
 
+## 39. Symbols:
+Symbol is a built-in object whose constructor returns a symbol primitive — also called a Symbol value or just a Symbol — that's guaranteed to be unique. Symbols are often used to add unique property keys to an object that won't collide with keys any other code might add to the object, and which are hidden from any mechanisms other code will typically use to access the object.
+````javascript
+//The below code creates three new Symbols. Note that Symbol("foo") does not coerce the string "foo" into a Symbol. It creates a new Symbol each time:
+const sym1 = Symbol();
+const sym2 = Symbol("foo");
+const sym3 = Symbol("foo");
 
+Symbol("foo") === Symbol("foo"); // false
+
+// The following syntax with the new operator will throw a TypeError:
+//  It is not a constructor in the traditional sense, because it can only be called as a function, instead of being constructed with new Symbol().
+const sym = new Symbol(); // TypeError
+
+
+````
 ## Polyfills
 ##  Function 
 ## Objects 
