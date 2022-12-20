@@ -2098,7 +2098,44 @@ const newObj=Array.prototype.myFilter.call(obj,(value)=>value>3)
 console.log(newObj)//[ 4, 5 ]
 ```
 
-### reduce
+### reduce polyfill:
+````javascript
+if(!Array.prototype.reduce){
+    Array.prototype.myReduce=function(callback,intialValue){
+        if(typeof callback !== "function") return
+        //intial value could be undefined if not provided 
+         let accumaltor=intialValue 
+         for(let i=0;i<this.length;i++){
+            // accumaltor can have undeined as well as a value 
+            if(i in this && accumaltor!==undefined){
+                // i am at zero index and accumaltor have some value so call callback for each index
+                accumaltor=callback(accumaltor,this[i],i,this)
+
+            }else{
+                // i am at zero index and accumlator is undefined
+                accumaltor=this[i]
+                continue 
+            }
+         }
+         return accumaltor
+    }
+}
+const array = [15, 16, 17, 18, 19];
+
+function reducer(accumulator, currentValue, index) {
+  const returns = accumulator + currentValue;
+  console.log(
+    `accumulator: ${accumulator}, currentValue: ${currentValue}, index: ${index}, returns: ${returns}`,
+  );
+  return returns;
+}
+array.myReduce(reducer);
+
+// accumulator: 15, currentValue: 16, index: 1, returns: 31
+// accumulator: 31, currentValue: 17, index: 2, returns: 48
+// accumulator: 48, currentValue: 18, index: 3, returns: 66
+// accumulator: 66, currentValue: 19, index: 4, returns: 85
+````
 
 ## Function
 
