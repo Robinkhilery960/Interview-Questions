@@ -2136,6 +2136,12 @@ array.myReduce(reducer);
 // accumulator: 48, currentValue: 18, index: 3, returns: 66
 // accumulator: 66, currentValue: 19, index: 4, returns: 85
 ````
+## 41. FileReader:
+The FileReader object lets web applications asynchronously read the contents of files (or raw data buffers) stored on the user's computer 
+FileReader can only access the contents of files that the user has explicitly selected, either using an HTML `<input type="file">` element or by drag and drop. It cannot be used to read a file by pathname from the user's file system.
+File reader reads a file in three state  and these three sate can be easily accessed by its readyState property if this gaves you value as 0 means that reader has been created. None of the read methods called yet.
+if it gives you valus as 1 means that A read method has been called.
+ans lastly if it gives you value 2 means   operation is complete.
 
 ## Function
 
@@ -2151,7 +2157,7 @@ array.myReduce(reducer);
 
 ## Javascript Nature
 
-## execution context
+## 41. execution context  
 
 ## callstack
 
