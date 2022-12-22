@@ -104,3 +104,42 @@ app.get('/', (req, res) => {
 ### Developing template engines for Express:
 You can even develope your own view engine if you want using `express.engine()`
 [See Here](https://expressjs.com/en/advanced/developing-template-engines.html) 
+
+## express.Router(options):
+The top-level express object has a Router() method that creates a new router object. 
+Parameter:an object whose property defines behavior of this router object :
+
+1. caseSensitive:/Foo and /foo will be treated same by the router - by default disabled
+
+2.  mergeParams: persevere parents req.params value -m by default false
+3. strict - /foo and /foo/ are treated as same by the router 
+
+you can add middleware and HTTP methods routes to router object just like an application 
+
+`router object`-
+you can think of this a s an  mini application that is able to perform middler and routing functions 
+
+router is itself behave as an middleware so you can use it as argument to the app.use()   or argument to the other routers use method 
+
+````javascript
+// created a router object 
+const router=express.Router() 
+````
+
+`router.use(middlewareFunction) `or `router.use("/",callbackFunction)`- this middleware function will be executed every time the app receive a request because no mount path is provided here 
+
+`router.use('/user/:id',middlewareFunction)`- here a middleware function is mounted on a specific path so the function will execute for any HTTP request on  /user/:id path. 
+
+
+`router.get('/user/:id',middlewareFunction)`- here a middleware function will execute only when  you receive a get request on this path 
+
+
+`router.use(path,middlewareFunction1,middlewareFunction2)` and 
+`router.use(path,[middlewareFunction1,middlewareFunction2])`- here both the middleware function will be called for every request on this path (remember that you have to mention next in both the middlewareFunction1 and middlewareFunction2)
+
+### Methods:
+1. `router.all()`: this method is same like router.METHOD() except that it matches to all the HTTP  methods
+2. [`router.METHOD`](https://expressjs.com/en/4x/api.html#router.METHOD)
+3. [`router.param()`](https://expressjs.com/en/4x/api.html#router.param)
+4. [`router.router()`](https://expressjs.com/en/4x/api.html#router.route)
+5. [`router.use`](https://expressjs.com/en/4x/api.html#router.use)
