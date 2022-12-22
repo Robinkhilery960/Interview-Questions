@@ -1,17 +1,17 @@
 # Interview Questions
 ## What is express ?
-## What are Middlewares functions and How to use them ?
+## What are middleware functions and How to use them ?
 Express is actually a series of middleware function calls 
-Middlewares functions are those function which  have access of request object , response object , and next middleware function in request response cycle> If you are using a middleware function  and your middleware function is not ending the request response cycle then pou have to call `next ` to pass the control to the next middleware or to response. If you will not do that then your  request will be left hanging 
+middleware functions are those function which  have access of request object , response object , and next middleware function in request response cycle> If you are using a middleware function  and your middleware function is not ending the request response cycle then pou have to call `next ` to pass the control to the next middleware or to response. If you will not do that then your  request will be left hanging 
 ### Types of Middleware:
 ### 1. Application level middleware :
 
 You can bind these application level middleware using `app.use()` and  `app.METHOD() `where METHOD function HTTP method of the request that middleware function handle   
 
-`app.use(middlewareFunction)`- this middleware function will be executed every time the app receive a request beacuse no mount path is provided here 
+`app.use(middlewareFunction)`- this middleware function will be executed every time the app receive a request because no mount path is provided here 
 
 
-`app.use('/user/:id',middlewareFunction)`- here a middleware function is mounted on a specific path so the function will execute for any HTTP reuest on  /user/:id path. 
+`app.use('/user/:id',middlewareFunction)`- here a middleware function is mounted on a specific path so the function will execute for any HTTP request on  /user/:id path. 
 
 
 `app.get('/user/:id',middlewareFunction)`- here a middleware function will execute only when  you receive a get request on this path 
@@ -52,11 +52,11 @@ app.get('/user/:id', (req, res, next) => {
 })
 ````
 ### 2. Router-level middleware :
-Router middleware workd in the same way the application router works but they are bind to the instance of `express.Router()` that is router object.
+Router middleware works in the same way the application router works but they are bind to the instance of `express.Router()` that is router object.
 You can load them using router.use() or router.METHOD().
 You have to mount the router in your app like `app.use("/",router)` or `app.use(router)` .
 ### 3. Error-handling middleware:
-rror-handling middleware always takes four arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don’t need to use the next object, you must specify it to maintain the signature. Otherwise, the next object will be interpreted as regular middleware and will fail to handle errors.
+error-handling middleware always takes four arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don’t need to use the next object, you must specify it to maintain the signature. Otherwise, the next object will be interpreted as regular middleware and will fail to handle errors.
 ````javascript
 app.use((err, req, res, next) => {
   console.error(err.stack)
@@ -73,4 +73,34 @@ express.urlencoded parses incoming requests with URL-encoded payloads.
 ### 5. Third-party middleware:
 You can use third party middleware to enhance express functionality  
 
-## How to write the middleware functions of your own?  
+##  How to use template engine with express? 
+### What are Template Engines  ? 
+Template engine that are mostly used for server side application. Template engine helps you to load static template file into your application.
+At run time 2 things happen :
+1. Your variable get replaced by actual value 
+2. Your template code is converted into a HTML code 
+### How to render the template files in express js :
+
+Generator have created an  app for you and  some of the application setting properties are  already set with default values  so  you have to change them - 
+1. views property- this is actually a directory where the template files are located so its default value is  `process.cwd() + '/views'` you can change it if you want  or you can keep it as it is.
+2. view engine-  this is the template engine you want to use and its default is not defined you can set this property like this `app.set("view engine","ejs") `
+
+ now install using npm install your view engine name 
+
+` res.render(view, object,callback)`-  a method used to render a view and send that html string to client 
+parameter-
+
+1. `view-` is a string that is a path of view file to render - this path could absolute ot relative to view setting- if view does not contain file extension - then view engine setting determines the file extension and if path does contain the file extension then express will load the module for that specific template engine  via require and render it using loaded modules __express function ,so actually render method call this loaded modules' __express function that is actually rendering it 
+2. `an object` - whose properties will behave as local variable to that view 
+3. `callback function `  
+Note- view argument perform file system operation like reading a file from your disk and evaluating node.js modules  so for security reasons should not contain input from  the end user 
+
+````javascript
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+````
+
+### Developing template engines for Express:
+You can even develope your own view engine if you want using `express.engine()`
+[See Here](https://expressjs.com/en/advanced/developing-template-engines.html) 
