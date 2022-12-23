@@ -143,3 +143,31 @@ const router=express.Router()
 3. [`router.param()`](https://expressjs.com/en/4x/api.html#router.param)
 4. [`router.router()`](https://expressjs.com/en/4x/api.html#router.route)
 5. [`router.use`](https://expressjs.com/en/4x/api.html#router.use)
+
+## express.json(options):
+This is an built-in middleware function.
+express.json() will return you a middleware and that middleware will only parse the body of that request whose content type header have the data type as JSON  
+
+What happen is that you get a request and then express.json() middleware see the content-type header and check that if content type is application/JSON then only i will parses the body of the request . Whatever Unicode  encoding you  have applied this will decode your data ,now a new body object is  created  with Object.create(null) and thus does not have a prototype and populated with the parsed data it may also return you an empty object if there was no data to parse  or the content type not matches or an error occurred
+You can also passes the option to  this middleware as parameter [see Here](https://expressjs.com/en/4x/api.html#express.json)
+
+## express.urlencoded(options):
+your post form send the data in this formate username=robin&password=robin an to tpo parse this data  we will bw needing app.use(express.urlencoded({extended:false})) , 
+
+What happen is that you get a request and then app.use(express.urlencoded({extended:false})) middleware see the content-type header and check that if content type is application/x-www-form-urlencoded then only i will parses the body of the request .  only works for utf=8 encoding  this will decode your data ,now a new body object is created  with Object.create(null) and thus does not have a prototype. and populated with the parsed data it may also return you an empty object if there was no data to parse  or the content type not matches or an error occurred
+You can also passes the option to  this middleware as parameter [see Here](https://expressjs.com/en/4x/api.html#express.urlencoded)
+
+## Option object keys of express.json(options) and express.urlencoded(options)
+option object  keys :
+1. extended: this value will decide that using which library you want to parse request body if false you will go for query string  library and if true you will go for qs library by default its value is true but using the default has been deprecated.The “extended” syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded.
+2. type: This is used to determine what media type the middleware will parse.
+3. parameterLimit:This option controls the maximum number of parameters that are allowed in the URL-encoded data. If a request contains more parameters than this value, an error will be raised.
+4. limit:Controls the maximum request body size
+5.inflate:Enables or disables handling deflated (compressed) bodies; when disabled, deflated bodies are rejected.
+6. verify : a function by default is  set to undefined
+
+## express-fileupload middleware:
+express-file Upload by default it uploads your file to  RAM , using useTempFiles option set to true you can actually  use temporary files - temporary files are rhos files which are created in the hard disk instead of RAM at the time of your softwares runs at RAM  in order too efficiently use Am and to avoid memory leakage 
+problems 
+if you will not provide temporary  files directory path then you your temp files will be stored at your cwd in folder tmp 
+[For more](https://www.npmjs.com/package/express-fileupload)
