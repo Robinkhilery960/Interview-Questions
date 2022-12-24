@@ -2239,11 +2239,28 @@ Callback queue stores the callback function provided by Web API in the sequence 
 The job of the event loop is to constantly monitor the state of the call stack and the callback queue. If the stack is empty it will grab a callback from the callback queue and put it onto the call stack, scheduling it for execution.This is why JavaScript often gets described as being able to run asynchronously, even though it is a single-threaded language. JavaScript can only execute one function at a time, so this means it is synchronous, but as we can push callbacks from the Web APIs to the callback queue and in turn, the event loop can constantly add those callback to the call stack, we think of JavaScript as being able to run asynchronously.
 
 ## single threaded vs Multi threaded
-# DOM, evelt listner, timing functions
+JS is a single threaded language it means that JS have a single call stack. This means that at  a single point of time only 1 task can be done. It does not uses  other thread like the one language like java does. 
+
+## DOM
+DOM(Document Object Model)  is a programming interface that helps you connect to web page using scripting languages like JS by representing your web page in in a tree structure of nodes and objects or in other word it is the DOM that helps you to interact with webpage to style it, to change the content of it etc.
+The scripting language is basically a language where instructions are written for a run time environment.
+The runtime environment is the environment in which a program or application is executed
+In general, an interface is a device or a system that unrelated entities use to interact.
+
+## Event and Event Handlers:
+  Every element object in HTML that can fire an event has an event and to handle that event they also have a method called `addEventListener` that takes three arguments.
+  1. Event on which you want to listen -required
+  2. Function to handle the event when it happens -required 
+  3. A boolean value:(default = false).
+  `false` - The handler is executed in the bubbling phase.
+  `true` - The handler is executed in the capturing phase.
+
+  You can also attach handler to an event using these element object properties starting with on and then event name like for click event object have property called onclick and you can assign it handler that will be executed when the function will be called but you cannot assign multiple handler for a event here because doing that will override each other but you can do that using addEventHandler method.There is also a third way using inline handler that you use  with the help of attributes , actually these attributes are nothing much but are properties and methods of the element object so it is same as we just did using event handler properties but this time you are doing that with the help of attributes .**You should never use the HTML event handler attributes — those are outdated, and using them is bad practice.**
+
 
 ## Java vs Javascript
 
-## Event loop
+ 
 
 ## RegExp
 
