@@ -2136,6 +2136,88 @@ array.myReduce(reducer);
 // accumulator: 48, currentValue: 18, index: 3, returns: 66
 // accumulator: 66, currentValue: 19, index: 4, returns: 85
 ````
+
+### call polyfill:
+````javascript
+const obj1={
+    name:"robin"
+}
+
+function getName(age){
+    console.log(this.name ,"is years",age ,"old")
+}
+
+// obj1.getName()// gave you an error that obj1 does not contain an getName function 
+
+getName.call(obj1)// robin
+
+ Function.prototype.customCall=function(thisArg={},...arg){
+    if(typeof this !=="function") return 
+    // this is pointing  to tha function for which you have called call 
+    // you call call it like as obj.function name 
+
+    thisArg.fn=this;
+    thisArg.fn(...arg) 
+
+ }
+ getName.customCall(obj1,23)// robin is 23 years old
+````
+### apply polyfill
+
+````javascript
+const obj1={
+    name:"robin"
+}
+
+function getName(age){
+    console.log(this.name ,"is years",age ,"old")
+}
+
+// obj1.getName()// gave you an error that obj1 does not contain an getName function 
+
+getName.apply(obj1)// robin
+
+ Function.prototype.customApply=function(thisArg={},argArray=[]){
+    if(typeof this !=="function") return 
+    if(!Array.isArray(argArray)) return 
+    // this is pointing  to tha function for which you have called apply 
+    // you call apply it like as obj.function name 
+
+    thisArg.fn=this;
+    thisArg.fn(...argArray) 
+
+ }
+ getName.customApply(obj1,[23])// robin is 23 years old
+```` 
+
+### bind polyfill:
+````javascript
+const obj1={
+    name:"robin"
+}
+
+function getName(age,city){
+        console.log(this.name ,"is years",age ,"old and lives in",city)
+    }
+    
+    // obj1.getName()// gave you an error that obj1 does not contain an getName function 
+    
+    // const boundFunction=getName.bind(obj1,23) 
+
+    // boundFunction("Delhi")
+    // robin is years 23 old and lives in Delhi 
+Function.prototype.customBind=function(thisArg={},...arg){
+if(typeof this !=="function") return  
+thisArg.fn=this
+return function(...newArg){
+  return thisArg.fn(...arg,...newArg)
+}
+}
+const boundFunction=getName.customBind(obj1,23)  
+    boundFunction("Delhi")  
+    // robin is years 23 old and lives in Delhi
+    ````
+
 ## 41. FileReader:
 The FileReader object lets web applications asynchronously read the contents of files (or raw data buffers) stored on the user's computer 
 FileReader can only access the contents of files that the user has explicitly selected, either using an HTML `<input type="file">` element or by drag and drop. It cannot be used to read a file by pathname from the user's file system.
@@ -2143,19 +2225,6 @@ File reader reads a file in three state  and these three sate can be easily acce
 if it gives you value as 1 means that A read method has been called.
 ans lastly if it gives you value 2 means   operation is complete.
 
-## Function
-
-## Objects
-
-## strict mode
-
-## undefined va null
-
-## Dom lifecycle
-
-## same-origin policy
-
-## Javascript Nature
 
 ## 41. execution context  
 Whenever a browser reading your html code and sees a script tag or any attribute that    contains js code like on onClick method it send that code to the js engine   where first a new environment is created to transform and execute that code. 
@@ -2211,7 +2280,7 @@ The Execution Context at the top of the Execution stack becomes the active Execu
 
 As soon as the execution of all the code within the active Execution Context is done, the JS engine pops out that particular function's Execution Context of the execution stack, moves towards the next below it, and so on.
 
-## JavaScript Runtime Environment 
+## 43. JavaScript Runtime Environment 
 Javascript run time environment provides your code access to built-in libraries and objects so that your programme can interact with outside world. 
 In case of browser it consist of following:
 1. The JavaScript engine (which in turn is made up of the heap and the call stack)
@@ -2238,16 +2307,16 @@ Callback queue stores the callback function provided by Web API in the sequence 
 4. The event loop:
 The job of the event loop is to constantly monitor the state of the call stack and the callback queue. If the stack is empty it will grab a callback from the callback queue and put it onto the call stack, scheduling it for execution.This is why JavaScript often gets described as being able to run asynchronously, even though it is a single-threaded language. JavaScript can only execute one function at a time, so this means it is synchronous, but as we can push callbacks from the Web APIs to the callback queue and in turn, the event loop can constantly add those callback to the call stack, we think of JavaScript as being able to run asynchronously.
 
-## single threaded vs Multi threaded
+## 45. single threaded vs Multi threaded
 JS is a single threaded language it means that JS have a single call stack. This means that at  a single point of time only 1 task can be done. It does not uses  other thread like the one language like java does. 
 
-## DOM
+## 46. DOM
 DOM(Document Object Model)  is a programming interface that helps you connect to web page using scripting languages like JS by representing your web page in in a tree structure of nodes and objects or in other word it is the DOM that helps you to interact with webpage to style it, to change the content of it etc.
 The scripting language is basically a language where instructions are written for a run time environment.
 The runtime environment is the environment in which a program or application is executed
 In general, an interface is a device or a system that unrelated entities use to interact.
 
-## Event and Event Handlers:
+## 47.Event and Event Handlers:
   Every element object in HTML that can fire an event has an event and to handle that event they also have a method called `addEventListener` that takes three arguments.
   1. Event on which you want to listen -required
   2. Function to handle the event when it happens -required 
@@ -2257,7 +2326,7 @@ In general, an interface is a device or a system that unrelated entities use to 
 
   You can also attach handler to an event using these element object properties starting with on and then event name like for click event object have property called onclick and you can assign it handler that will be executed when the function will be called but you cannot assign multiple handler for a event here because doing that will override each other but you can do that using addEventHandler method.There is also a third way using inline handler that you use  with the help of attributes , actually these attributes are nothing much but are properties and methods of the element object so it is same as we just did using event handler properties but this time you are doing that with the help of attributes .**You should never use the HTML event handler attributes — those are outdated, and using them is bad practice.**
 
-## Event Phases:
+## 48. Event Phases:
 Every events starts from the root element that is document 
 
 **Capturing phase** :
@@ -2270,7 +2339,7 @@ When event is reached to its target then it is in target phase means that  we ha
 When your event is traveling back from the target to the root element after performing its event 
 
 
-So whenever we attach an event listener to any of the  event at that time we also gave it a parameter  that in which mode you want to execute this event handler attached to your event like false for the capturing phase by default so lets say when your event was traveling to the target at tha time it must have taken a path then during taking this path it may have found many elements which have many event handler attached for different different event  and those event handler will also be having there mode of execution so if during that if your even encounter any similar event and that too mode of event handler as capturing that it will call that event handler of tha element also and  the same can goes to the bubbling phase too.
+So whenever we attach an event listener to any of the  event at that time we also gave it a parameter  that in which mode you want to execute this event handler attached to your event like false for the bubbling phase by default so lets say when your event was traveling to the target at tha time it must have taken a path then during taking this path it may have found many elements which have many event handler attached for different different event  and those event handler will also be having there mode of execution so if during that if your even encounter any similar event and that too mode of event handler as capturing that it will call that event handler of tha element also and  the same can goes to the bubbling phase too.
 
 Event object properties:
 These are majorly used properties:
@@ -2288,11 +2357,13 @@ These are majorly used properties:
 1. event.stopPropagation:
 this method can prevent you bubbling phase to happen 
 2. event.stopImmediatePropagation- this method can prevent your bubbling phase as well as to the sibling also if on any element you =have 3 event handler for click event and in 2st event handler you called this method than this will prevent other two handler from execution 
-
-## Java vs Javascript
-
  
-
-## RegExp
-
-## Set
+## Function 
+## strict mode 
+## undefined va null 
+## same-origin policy 
+## RegExp 
+## Set 
+todo:
+1. check click event and submit event 
+2. preventDefault() check 
