@@ -2257,6 +2257,37 @@ In general, an interface is a device or a system that unrelated entities use to 
 
   You can also attach handler to an event using these element object properties starting with on and then event name like for click event object have property called onclick and you can assign it handler that will be executed when the function will be called but you cannot assign multiple handler for a event here because doing that will override each other but you can do that using addEventHandler method.There is also a third way using inline handler that you use  with the help of attributes , actually these attributes are nothing much but are properties and methods of the element object so it is same as we just did using event handler properties but this time you are doing that with the help of attributes .**You should never use the HTML event handler attributes — those are outdated, and using them is bad practice.**
 
+## Event Phases:
+Every events starts from the root element that is document 
+
+**Capturing phase** :
+ when event is traveling from the document to  its destination is called capturing phase 
+
+**Target phase**: 
+When event is reached to its target then it is in target phase means that  we have received to the element which  invoked the event 
+
+**Bubbling phase**:
+When your event is traveling back from the target to the root element after performing its event 
+
+
+So whenever we attach an event listener to any of the  event at that time we also gave it a parameter  that in which mode you want to execute this event handler attached to your event like false for the capturing phase by default so lets say when your event was traveling to the target at tha time it must have taken a path then during taking this path it may have found many elements which have many event handler attached for different different event  and those event handler will also be having there mode of execution so if during that if your even encounter any similar event and that too mode of event handler as capturing that it will call that event handler of tha element also and  the same can goes to the bubbling phase too.
+
+Event object properties:
+These are majorly used properties:
+1. event.target: represent that element on which event is triggered 
+2. event.currentTarget:
+represent that element on which listener is attached 
+3. event.phases:
+represent the phase which is going on in form of number .
+0-> None
+1-> capturing phase 
+2->Target phase3->bubbling phase 
+
+Event object methods:
+These are majorly used properties:
+1. event.stopPropagation:
+this method can prevent you bubbling phase to happen 
+2. event.stopImmediatePropagation- this method can prevent your bubbling phase as well as to the sibling also if on any element you =have 3 event handler for click event and in 2st event handler you called this method than this will prevent other two handler from execution 
 
 ## Java vs Javascript
 
