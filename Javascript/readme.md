@@ -39,7 +39,7 @@ Every object in JavaScript has a built-in property, which is called its **proto
 Normally when we call a function then the value of this , that is passed to function is the object on which we have accessed the function , but if you want to pass your own this you can do that using `call`,`apply` and `bind` methods
 
 Normally, when calling a function, the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
- inside the function is the object that the function was accessed on. With these funtions
+ inside the function is the object that the function was accessed on. With these functions
 , you can assign an arbitrary value as `this`
  when calling an existing function, **without first attaching the function to the object as a property**. This allows you to use methods of one object as generic utility functions.
 
@@ -118,7 +118,7 @@ There are many ways to create objects in javascript as below
 
 1.  **Object constructor:**
 
-    You can create an object using Object Constructer
+    You can create an object using Object Constructor
 
     ```javascript
     var object = new Object();
@@ -126,8 +126,8 @@ There are many ways to create objects in javascript as below
 
     ### Cross Questions:
 
-        1.  What is a  Constructer ?
-        2. What is an Object Constructer
+        1.  What is a  Constructor ?
+        2. What is an Object Constructor
 
 2.  **Object's create method:**
 
@@ -156,7 +156,7 @@ There are many ways to create objects in javascript as below
 
 4.  **Function constructor:**
 
-    Create any function and apply the new operator to create object instances, using function as a constructer
+    Create any function and apply the new operator to create object instances, using function as a Constructor
 
     ```javascript
     function Person(name) {
@@ -168,9 +168,9 @@ There are many ways to create objects in javascript as below
 
     ### Cross Questions:
 
-        1. What is difference of creating an object from class and creating an object front the function constructer
-        2. Is all the function in JavaScript can be called as constructer function ?
-        3. what is difference between creating an Object from  object literals and creating an object from  function  constructer
+        1. What is difference of creating an object from class and creating an object front the function Constructor
+        2. Is all the function in JavaScript can be called as Constructor function ?
+        3. what is difference between creating an Object from  object literals and creating an object from  function  Constructor
         4. what is this new keyword and what does it do ?
 
 5.  **Function constructor with prototype:**
@@ -343,8 +343,8 @@ null === undefined // false
 
 ## 9. What are arrow function and where to not use them ?
 
-An arrow function is a shorter syntax for a function expression and does not have its own this so don't use arrow function as object methods, Event handlers, Prototype methods. Arrow function dont have argument object so also not use them for functions that use the arguments object.
-Arrow functions also does not have new.target keyword so also dont use them as constructer functions
+An arrow function is a shorter syntax for a function expression and does not have its own this so don't use arrow function as object methods, Event handlers, Prototype methods. Arrow function don't have argument object so also not use them for functions that use the arguments object.
+Arrow functions also does not have new.target keyword so also don't use them as Constructor functions
 
 ### Object methods:
 
@@ -366,7 +366,7 @@ The window.count is undefined by default because the window object doesn’t hav
 
 ### Constructor :
 
-Whenever you uses any function as a constructer function then prototype property of that constructer is set as prototype of created object and this prototype property contains the constructer , but in case of arrow function this is missing so you cant use arrow function as constructer and also arrow function does not have new.target so it will never know that it is called with new keyword or not.
+Whenever you uses any function as a Constructor function then prototype property of that Constructor is set as prototype of created object and this prototype property contains the Constructor , but in case of arrow function this is missing so you cant use arrow function as Constructor and also arrow function does not have new.target so it will never know that it is called with new keyword or not.
 
 ```javascript
 const Car = (make, model, year) => {
@@ -470,7 +470,7 @@ This environment consists of any local variables that were in-scope at the time 
 
 ## 11. What does Lexical scope means?
 
-Lexical scope means the scope in which a item is created . In other words area where your item defination lies is called lexical sope of that item .Any item is accessible to the code which is in its lexical scope .
+Lexical scope means the scope in which a item is created . In other words area where your item definition lies is called lexical scope of that item .Any item is accessible to the code which is in its lexical scope .
 
 ```javascript
 // Define a function:
@@ -503,7 +503,7 @@ In other words, lastName’s lexical scope is different from that of displayFull
 A programming language is said to have First-class functions when functions in that language are treated like any other variable. For example, in such a language, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
 
 ```javascript
-    // assigning function to variavle
+    // assigning function to variable
    const greet=function(){
     console.log("Hola")
    }
@@ -597,9 +597,9 @@ Scope refers to the part of a program where we can access a variable
 
 ### var :
 
-Variables declared with var keyword are either function scoped or global scope depending upon where they are declared.Initializtion of variables is optional.
+Variables declared with var keyword are either function scoped or global scope depending upon where they are declared.Initialization of variables is optional.
 Variables declared using var are created before any code is executed in a process known as hoisting. Their initial value is undefined.
-Redeclaration, reassigning is possible in same scope
+re-declaration, reassigning is possible in same scope
 
 ```javascript
 console.log(name); // undefined
@@ -623,8 +623,8 @@ console.log(y); // 20 not a block scope
 ### let :
 
 Variable declared with this keyword are block scope and initializing it to a value is optional.
-Variable declared with let can only be accessed after its declaration is reached beacuse of Temporal Dead Zone.
-Redeclaring the same variable within the same function or block scope raises a SyntaxError while reassiging can be done
+Variable declared with let can only be accessed after its declaration is reached because of Temporal Dead Zone.
+Redeclaring the same variable within the same function or block scope raises a SyntaxError while reassigning can be done
 
 ```javascript
 var a = 1;
@@ -650,7 +650,7 @@ let x = 1;
 
 ### const:
 
-Variable declared with this keyword are block scope and they cannot be redeclared annd reassigned and initializer for a constant is required. However, if a constant is an object or array its properties or items can be updated or removed.
+Variable declared with this keyword are block scope and they cannot be redeclare and reassigned and initializer for a constant is required. However, if a constant is an object or array its properties or items can be updated or removed.
 
 ```javascript
 // define MY_FAV as a constant and give it the value 7
@@ -689,7 +689,7 @@ MY_ARRAY.push("A"); // ["A"]
 
 ## 17. What is Hoisting ?
 
-Javascript hoisting refer to the process where declaration of functions, variables or classes move to the top of their scope before execution of the code.. Remember that JavaScript only hoists declarations, not initialisation
+Javascript hoisting refer to the process where declaration of functions, variables or classes move to the top of their scope before execution of the code.. Remember that JavaScript only hoists declarations, not initialization
 
 ### Variable Hoisting:
 
@@ -697,7 +697,7 @@ Variables declaration are hoisted to top of their scope.Undeclared variables do 
 
 ```javascript
 console.log(typeof variable); // undefined
-console.log(variable); // Refernece error - when try to access an undeclared  variable
+console.log(variable); // Reference error - when try to access an undeclared  variable
 
 console.log(hoist); // Output: undefined
 
@@ -708,7 +708,7 @@ function hoist() {
   var message = "Hoisting is all the rage!";
 }
 
-hoist(); // Ouput: undefined
+hoist(); // Output: undefined
 
 // let keyword
 console.log(hoist); // Output: ReferenceError: hoist is not defined ...
@@ -761,11 +761,11 @@ TDZ describe a state for let and const , where they are in scope but they cannot
 }
 ```
 
-### What's the difference between declaring and initialising?
+### What's the difference between declaring and initializing?
 
 Declaring a variable means we reserve the name in memory at the current scope. That is labelled 1 in the comments.
 
-Initialising a variable is setting the value of the variable. That is labelled 2 in the comments.
+Initializing a variable is setting the value of the variable. That is labelled 2 in the comments.
 
 ```javascript
 function scopeExample() {
@@ -795,9 +795,9 @@ Just to prove let and const also hoist, here's an example:
 
 The above snippet is proof that let is clearly hoisted above where it was declared, as the engine alerts us to the fact. It knows name exists (it's declared), but we can't access it before it is initialized.
 
-## 19. Funtions
+## 19. Functions
 
-A function is a set of statements that take inputs, do some specific computation, and produce output.In JavaScript, functions are first-class objects, because they can have properties and methods just like any other object. What distinguishes them from other objects is that functions can be called. In brief, they are Function objects.For constructer function default return value is `this` keyword and for other function it is undefined.
+A function is a set of statements that take inputs, do some specific computation, and produce output.In JavaScript, functions are first-class objects, because they can have properties and methods just like any other object. What distinguishes them from other objects is that functions can be called. In brief, they are Function objects.For constructor function default return value is `this` keyword and for other function it is undefined.
 Arguments may be passed by value (in the case of primitive values) or by reference (in the case of objects).The this keyword does not refer to the currently executing function, so you must refer to Function objects by name, even within the function body.
 Functions created with the Function constructor do not create closures to their creation contexts; they always are created in the global scope. When running them, they will only be able to access their own local variables and global ones, not the ones from the scope in which the Function constructor was created.
 
@@ -885,7 +885,7 @@ You can end a destructuring pattern with a rest property ...rest. This pattern w
 
 ## 22. rest and spread operator
 
-When you dont know that how many arguments are supplied to your function then you can use rest parameter there to accept those arguments.
+When you don't know that how many arguments are supplied to your function then you can use rest parameter there to accept those arguments.
 A function definition's last parameter can be prefixed with ... which will cause all remaining (user supplied) parameters to be placed within an Array object.
 
 ```javascript
@@ -949,7 +949,7 @@ const obj = { ...array }; // { 0: 1, 1: 2, 2: 3 }
 
 ## 24. new keyword
 
-New keyword let you define a new instance of a user defined object type or in-built object type that has a constructer function.
+New keyword let you define a new instance of a user defined object type or in-built object type that has a constructor function.
 
 ```javascript
 function Car(make, model, year) {
@@ -1002,7 +1002,7 @@ console.log(message); //Error: message is not defined
 
 ## 26. How do you decode or encode a URL in JavaScript
 
-For encoding and decoding purpuse we mainly uses UTF-8 format.UTF-8 means `Unicode Transformation Format - 8 bits`.It is an formate in which each code point will be assined memory and these codepoints are specific to each character for some character UTF-8 uses 1 byte ,for some 2 or 3 or for some also 4. We uses mailnt UTF-8 because it decreases your file size as much as it can.
+For encoding and decoding purpose we mainly uses UTF-8 format.UTF-8 means `Unicode Transformation Format - 8 bits`.It is an formate in which each code point will be assigned memory and these codepoints are specific to each character for some character UTF-8 uses 1 byte ,for some 2 or 3 or for some also 4. We uses mainly UTF-8 because it decreases your file size as much as it can.
 
 `encodeURI()` function is used to encode an URL. This function requires a URL string as a parameter and return that encoded string.
 
@@ -1044,8 +1044,8 @@ fib(5); // 120
 
 ## 28.Classes:
 
-Classes are a template for creating objects.Class declarations and Class expressions both are hoisted but they they are not intialized so you cannot access them before defining them .The body of a class is executed in strict mode.The constructor method is a special method for creating and initializing an object created with a class. There can only be one special method with the name "constructor" in a class.The static keyword defines a static method or property for a class. Static members (properties and methods) are called without instantiating their class and cannot be called through a class instance.
-clasess are unfer the hoods actually function with the same prototype as the constructer have .
+Classes are a template for creating objects.Class declarations and Class expressions both are hoisted but they they are not initialized so you cannot access them before defining them .The body of a class is executed in strict mode.The constructor method is a special method for creating and initializing an object created with a class. There can only be one special method with the name "constructor" in a class.The static keyword defines a static method or property for a class. Static members (properties and methods) are called without instantiating their class and cannot be called through a class instance.
+classes are under the hoods actually function with the same prototype as the constructor have .
 
 ### Classes are nothing but syntactic sugar:
 
@@ -1181,7 +1181,7 @@ display(gorilla.dailyRoutine());
 
 JavaScript modules allow you to break up your code into separate files. This makes it easier to maintain the code-base.JavaScript modules rely on the `import` and `export` statements.
 Modules increase Maintainability,Reusability and
-Namespacing of your code.
+Name spacing of your code.
 
 ### CommonJS modules and ES modules
 
@@ -1279,7 +1279,7 @@ document.cookie = "dark_mode=true; max-age=-60"; // 1 minute earlier
 ## 31. Web Storage API:
 
 Web Storage provides you two mechanisms sessionStorage and localStorage that maintains a separate storage area for each given origin.
-Local storage and session Storage are a properies of window object that are used to access storage object and storage object is used to acess current origin's storage area by the defined methods
+Local storage and session Storage are a properties of window object that are used to access storage object and storage object is used to access current origin's storage area by the defined methods
 
 ### local Storage Vs Session Storage:-
 
@@ -1318,7 +1318,7 @@ sessionStorage.setItem("name", "sunil");
 sessionStorage.setItem("myFriend", "robin");
 // get item from session storage
 sessionStorage.getItem("name");
-// remobe item from session storage
+// remove item from session storage
 sessionStorage.removeItem("name");
 // clear session storage
 sessionStorage.clear();
@@ -1334,7 +1334,7 @@ An non-rational key value database for client side tp storage significant amount
 Advantages of IndexDB:
 
 1. IndexedDB is asynchronous, meaning it does not stop the user interface from rendering while the data loads.
-2. It allows you to categorise your data using object stores.
+2. It allows you to categorize your data using object stores.
 3. It allows you to store large amounts of data.
 4. It supports objects like videos, images, and so on – any object that supports a structured clone algorithm.
 5. It supports database transactions and versioning.
@@ -1343,22 +1343,22 @@ Advantages of IndexDB:
 8. It is supported on all modern browsers.
 
 ```javascript
-// a global object that gives to acess og databse - connect to databse with aits open method
+// a global object that gives to access of database - connect to database with  this open method
 const indexDB = window.indexedDB;
 
 let db;
-// request object   given to you immediately and opeing of databse goes async
+// request object   given to you immediately and opening of database goes async
 const requestObject = indexedDB.open("todo");
 
 requestObject.onupgradeneeded = (e) => {
-  // called when databse already dont exist or databse version greater then current version
+  // called when database already don't exist or database version greater then current version
   db = requestObject.result;
   // creating a object store and providing a unique key in option that will help to find objects
   db.createObjectStore("personalNotes", { keyPath: "title" });
   db.createObjectStore("workNotes", { keyPath: "title" });
 };
 
-// thtis sucess function will be called everytime till provided version >= current version
+// this success function will be called every time till provided version >= current version
 requestObject.onsuccess = (e) => {
   db = requestObject.result;
   // add note to object store
@@ -1371,27 +1371,27 @@ const addNote = () => {
     title: "note1",
     text: "i am first note",
   };
-  // open a transcation on a object store and mention mode of transction
+  // open a transaction on a object store and mention mode of transaction
   const tx = db.transaction("personalNotes", "readwrite");
   // get that object store
   const personalNotes = tx.objectStore("personalNotes");
-  // made a request to add a new note to obejct store
+  // made a request to add a new note to object store
   const storeRequest = personalNotes.add(note);
 
   storeRequest.onsuccess = () => {
-    console.log("note added sucessfully");
+    console.log("note added successfully");
   };
 };
 
-// reterive data from index db
+// retrieve data from index db
 // loading takes some time so use settimeout
 setTimeout(() => {
   if (db) {
-    // open a transcation on a object store and mention mode of transction
+    // open a transaction on a object store and mention mode of transaction
     const tx = db.transaction("personalNotes", "readonly");
     // get that object store
     const personalNotes = tx.objectStore("personalNotes");
-    // made a request to get data obejct store
+    // made a request to get data object store
     const storeRequest = personalNotes.getAll();
     storeRequest.onsuccess = (e) => {
       console.log(e.target.result);
@@ -1403,7 +1403,7 @@ setTimeout(() => {
 ## 33. Aynsc Javascript
 
 Asynchronous programming is a form of parallel programming that does not blocks your code flow means your multiple tasks can be done at a time.
-To perform asynchronous programming in javascript we specially uses 3 thngs callbacks ,promises and async-await .
+To perform asynchronous programming in javascript we specially uses 3 things callbacks ,promises and async-await .
 
 1. callbacks function:A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
 
@@ -1428,13 +1428,13 @@ Promise is a object that represents the eventual completion or failure of a asyn
 Asynchronous function will start its operation and it will return you a promise object , and through this promise object you can add handlers on eventual state of promise.It will be in one of the 3 possible states: fulfilled, rejected, or pending.
 
 ```javascript
-// fetch an sdync operation return a promise object to you
+// fetch an async operation return a promise object to you
 const fetchPromise = fetch(
   "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json"
 );
-// intial state of this promise will be pending
+// initial state of this promise will be pending
 console.log(fetchPromise);
-// when promise will be resolved this means that your fetch function  do its work suceessfully without errors then a then method is called on fulfilled state of promise
+// when promise will be resolved this means that your fetch function  do its work successfully without errors then a then method is called on fulfilled state of promise
 // response object will be send to this handler
 fetchPromise
   .then((response) => {
@@ -1455,8 +1455,8 @@ Received response: 200
 
 ### Transition from callbacks to promise based
 
-Tradiotnal callback :
-In callback they are called when a perticular task has given you output either it result or it is an error you callback will be called so the point is callbacks are executed after a certain time of interval with the result value the same cab be achevied through promises how instead of gicing thesse output values to the callback directly what happens if if gave them to promies and when i reaceive a value from the async function I can use that value by attaching some handlers over it this whole work of tieing outcome to a promise from a callback is done by executer function that is a solo paramter for the Promise constructer.
+Traditional callback :
+In callback they are called when a particular task has given you output either it result or it is an error you callback will be called so the point is callbacks are executed after a certain time of interval with the result value the same cab be achieved through promises how instead of giving these output values to the callback directly what happens if if gave them to promise and when i receive a value from the async function I can use that value by attaching some handlers over it this whole work of tieing outcome to a promise from a callback is done by executer function that is a solo parameter for the Promise constructor.
 
 ```javascript
 readFile("hello.text", (error, result) => {
@@ -1475,10 +1475,10 @@ new Promise(executor);
 
 FLOW:
 
-1.  Whenever your Promise constructer actually create new promise object at that time it also creates two function called resolve and reject functions those are bind to your newly created promise object.
-2.  Inside the executer function you actually do your Asynchronous task with the help of callback - yes we ueses here callback you cannot avoid callbacks - these callbacks are actually defined inside your executer function so these have access to resolve and reject functions.
-3.  As soon as a promise is created with promise constructer this executer function is called `synchronously` with argumets as resolve and reject functions
-4.  Eventual completetion of the asynchrounous function will be communicated with the promise instace by your resolve and reject method.  
+1.  Whenever your Promise constructor actually create new promise object at that time it also creates two function called resolve and reject functions those are bind to your newly created promise object.
+2.  Inside the executer function you actually do your Asynchronous task with the help of callback - yes we uses here callback you cannot avoid callbacks - these callbacks are actually defined inside your executer function so these have access to resolve and reject functions.
+3.  As soon as a promise is created with promise constructor this executer function is called `synchronously` with arguments as resolve and reject functions
+4.  Eventual completion of the asynchronous function will be communicated with the promise instance by your resolve and reject method.  
     4.a Once you called any of resolve or reject function your promise get resolve after that whatever number of time you want to call thses functions your promise state wont change
 
         4.b Promise resolve does not mean that its state will be either fulfilled or rejected it can be pending also depends upon what you have send as paramter to resolve function if you have sent a new promise then its state will still remain dependend on state of new promise
@@ -2139,8 +2139,8 @@ array.myReduce(reducer);
 ## 41. FileReader:
 The FileReader object lets web applications asynchronously read the contents of files (or raw data buffers) stored on the user's computer 
 FileReader can only access the contents of files that the user has explicitly selected, either using an HTML `<input type="file">` element or by drag and drop. It cannot be used to read a file by pathname from the user's file system.
-File reader reads a file in three state  and these three sate can be easily accessed by its readyState property if this gaves you value as 0 means that reader has been created. None of the read methods called yet.
-if it gives you valus as 1 means that A read method has been called.
+File reader reads a file in three state  and these three sate can be easily accessed by its readyState property if this gave you value as 0 means that reader has been created. None of the read methods called yet.
+if it gives you value as 1 means that A read method has been called.
 ans lastly if it gives you value 2 means   operation is complete.
 
 ## Function
@@ -2158,6 +2158,46 @@ ans lastly if it gives you value 2 means   operation is complete.
 ## Javascript Nature
 
 ## 41. execution context  
+Whenever a browser reading your html code and sees a script tag or any attribute that    contains js code like on onClick method it send that code to the js engine   where first a new environment is created to transform and execute that code. 
+In execution context code will be parsed and variables and function declarations will be assigned memory and then code will be transformed into binary so that CPU can understand and execute it.
+
+Js engine create 2 types of execution context :
+
+1. global execution context 
+2. function execution context 
+
+Global Execution Context(GEC) : 
+For every js file a global execution context is created and inside that global code will be executed that too the code that is written outside of the function .
+
+Function  Execution  Context will be created when that function will be called and there can be more than 1 function execution context but only 1 global execution context 
+
+How execution context are created :
+Every execution context is created in 2 phases:
+ 1. creation phase
+ 2. execution phase 
+
+1. creation phase is associated with Execution Context Object(ECO) creation .
+ECO holds the important data that a code needed while execution that code. 
+
+ECO creation happens in 3 phases:
+
+1. creation of variable object 
+2. creation of scope chain 
+3. setting up the value of this keyword 
+
+1. creation of the variable object :
+
+A Variable Object(VO) is created in a execution context  and it stores the variable and function declaration  defined with in that execution context. 
+
+For example  if you declare a variable in GEC with var keyword then a property will be created in VO and  a undefined will be assigned to that property.
+ For function declaration - a property is also added that refer to that function and this property is stored in memory 
+this means that variable and function declaration are made accessible and stored inside the VO .
+In FEC no VO is created but an an array like argument object is created that stores all th arguments supplied to that function . 
+
+2. Creation of scope chain : Each FEC defined its scope that is whatever variable and  function it defined  are accessible in its scope 
+
+3. creation phase setting up the value of this 
+ 
 
 ## callstack
 
