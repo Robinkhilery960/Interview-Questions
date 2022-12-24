@@ -2199,7 +2199,18 @@ In FEC no VO is created but an an array like argument object is created that sto
 3. creation phase setting up the value of this 
  
 
-## callstack
+## 42. callStack
+CallStack also called as execution context because it maintain the track of all the execution context created during lifecycle of a programme.
+JavaScript is a single-threaded language, which means that it is capable of only executing a single task at a time. Thus, when other actions, functions, and events occur, an Execution Context is created for each of these events. Due to the single-threaded nature of JavaScript, a stack of piled-up execution contexts to be executed is created, known as the Execution Stack.
+
+When scripts load in the browser, the Global context is created as the default context where the JS engine starts executing code and is placed at the bottom of the execution stack.
+
+The JS engine then searches for function calls in the code. For each function call, a new FEC is created for that function and is placed on top of the currently executing Execution Context.
+
+The Execution Context at the top of the Execution stack becomes the active Execution Context, and will always get executed first by the JS engine.
+
+As soon as the execution of all the code within the active Execution Context is done, the JS engine pops out that particular function's Execution Context of the execution stack, moves towards the next below it, and so on.
+
 
 ## single threaded vs Multi threaded
 
