@@ -2211,8 +2211,35 @@ The Execution Context at the top of the Execution stack becomes the active Execu
 
 As soon as the execution of all the code within the active Execution Context is done, the JS engine pops out that particular function's Execution Context of the execution stack, moves towards the next below it, and so on.
 
+## JavaScript Runtime Environment 
+Javascript run time environment provides your code access to built-in libraries and objects so that your programme can interact with outside world. 
+In case of browser it consist of following:
+1. The JavaScript engine (which in turn is made up of the heap and the call stack)
+2. Web APIs
+3. The callback queue
+4. The event loop
+run time environment may be different for node js from browser these differences occurs at the implementation level. 
+
+1. Javascript engine:
+Main work of JS engine is to parse your code and create execution context and execute your code. It mainly consist of heap and callstack.
+Heap:
+Heap is a section of memory that too unstructured and is used to store variable and objects
+
+Callstack:It is a data structure that is used to keep track of where we are in programme or uou can say it is used to keep track of execution context.Frame at the top of the stack is the one the engine is focused on, and it will not move on to the next function unless the function above it has been removed from the stack.It uses last in first out .
+
+As the JS engine steps into a function, it is pushed onto the stack. When a function returns a value or gets sent to the Web APIs, it is popped off the stack.f a function doesn’t explicitly return a value then the engine will return undefined and also pop the function off the stack. This is what is meant by the term “JavaScript runs synchronously”; it is single-threaded, so can only do one thing at a time
+
+2. Web API: 
+Web Api are not part of the JS engine but they are part of JS runtime environment. browser provides us a lot of web api like DOM API, Canvas API , Fetch API features like event listeners, timing functions and AJAX requests all sit in the Web APIs container until an action gets triggered. 
+
+3. Callback queue:
+Callback queue stores the callback function provided by Web API in the sequence they were send ]. It uses first in first out . A callback will be added to the queue using array's push method will removed using array's shift method . Callback function sit the callback queue until callstack is not empty and as soon as callstack becomes empty event loop will send your callback function to callstack 
+
+4. The event loop:
+The job of the event loop is to constantly monitor the state of the call stack and the callback queue. If the stack is empty it will grab a callback from the callback queue and put it onto the call stack, scheduling it for execution.This is why JavaScript often gets described as being able to run asynchronously, even though it is a single-threaded language. JavaScript can only execute one function at a time, so this means it is synchronous, but as we can push callbacks from the Web APIs to the callback queue and in turn, the event loop can constantly add those callback to the call stack, we think of JavaScript as being able to run asynchronously.
 
 ## single threaded vs Multi threaded
+# DOM, evelt listner, timing functions
 
 ## Java vs Javascript
 
